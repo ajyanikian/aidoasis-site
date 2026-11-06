@@ -908,12 +908,12 @@ async function loadVerified(){
     const rows=parseCSV(txt),h=rows.shift().map(x=>x.replace(/^\ufeff/,"").trim().toLowerCase());
     const g=(r,k)=>(r[h.indexOf(k)]||"").trim(),list=v=>v?v.split("|").map(x=>x.trim()).filter(Boolean):[],yes=v=>/^(true|yes|1|si|sí)$/i.test(v);
     const got=rows.filter(r=>r.length>3&&g(r,"status").toLowerCase()==="verified").map(r=>({
-      status:"verified",city:g(r,"city_key"),need:g(r,"need"),name:g(r,"name"),area:g(r,"area"),free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),
+      status:"verified",city:g(r,"city_key"),need:g(r,"need"),name:g(r,"name"),area:(g(r,"address")||g(r,"area")),free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),
       langs:list(g(r,"languages")),phone:g(r,"phone"),wa:g(r,"whatsapp").replace(/\D/g,""),checked:g(r,"checked"),hours:g(r,"hours"),site:/^https?:\/\//.test(g(r,"website"))?g(r,"website"):"",
       ll:(g(r,"lat")&&g(r,"lon"))?[parseFloat(g(r,"lat")),parseFloat(g(r,"lon"))]:null}));
     if(got.length){VERIFIED=got;FROM_SHEET=true;}
     SHEET_UNCHECKED=rows.filter(r=>r.length>3&&g(r,"status").toLowerCase()==="approved"&&g(r,"lat")&&g(r,"lon")).map(r=>({
-      osm:true,fromSheet:true,free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),langs:list(g(r,"languages")),wa:g(r,"whatsapp").replace(/\D/g,""),name:g(r,"name"),need:g(r,"need"),area:g(r,"area"),phone:g(r,"phone"),hours:g(r,"hours"),
+      osm:true,fromSheet:true,free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),langs:list(g(r,"languages")),wa:g(r,"whatsapp").replace(/\D/g,""),name:g(r,"name"),need:g(r,"need"),area:(g(r,"address")||g(r,"area")),phone:g(r,"phone"),hours:g(r,"hours"),
       site:/^https?:\/\//.test(g(r,"website"))?g(r,"website"):"",ll:[parseFloat(g(r,"lat")),parseFloat(g(r,"lon"))]}));
   }catch(e){SHEET_STATE="failed";console.warn("AidOasis: could not load the Google Sheet",e);}
   return VERIFIED;
