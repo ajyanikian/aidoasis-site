@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AidOasis · Find free help near you</title>
+<meta name="description" content="Find free legal help, shelter, food, health care and more, checked by people, in your language.">
+<!--
+  AidOasis website — Brandbook styling (navy / orange / sky; serif display + Asap)
+  Routes: #  #find  #organizations  #about   ·   Finder deep links: #<lang>-<city>-<need>  e.g. #es-tijuana-legal
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600&family=DM+Serif+Display&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F4EE; --surface:#FFFFFF; --ink:#1E271E; --muted:#767C70; --line:#E2E2D9; --soft:#EDEDE4;
+  --forest:#2C3A2B; --on-forest:#F5F4EE; --on-forest-muted:#B7C0B0;
+  --lime:#E4EDB4; --on-lime:#1E271E; --accent:#2C3A2B;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111510; --surface:#192019; --ink:#ECEDE5; --muted:#9AA094; --line:#2B3329; --soft:#20281F;
+    --forest:#22301F; --on-forest:#ECEDE5; --on-forest-muted:#A8B3A0;
+    --lime:#DCE7A6; --on-lime:#1E271E; --accent:#DCE7A6; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111510; --surface:#192019; --ink:#ECEDE5; --muted:#9AA094; --line:#2B3329; --soft:#20281F;
+  --forest:#22301F; --on-forest:#ECEDE5; --on-forest-muted:#A8B3A0;
+  --lime:#DCE7A6; --on-lime:#1E271E; --accent:#DCE7A6; color-scheme:dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Noto Sans Arabic",Tahoma,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;-webkit-text-size-adjust:100%;
+}
+.wrap{max-width:70rem;margin:0 auto;padding:0 1.25rem}
+@media (min-width:48rem){.wrap{padding:0 2rem}}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* header */
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;padding-top:1rem;padding-bottom:.75rem}
+.mark{display:flex;align-items:center;gap:.5rem;font-weight:500;font-size:1.1rem;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.mark i{width:1.1rem;height:1.1rem;border-radius:50%;border:2px solid var(--ink);position:relative}
+.mark i::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--ink)}
+nav{display:flex;gap:1.25rem;order:3;width:100%;overflow-x:auto}
+@media (min-width:48rem){nav{order:0;width:auto;margin-inline-start:auto}}
+nav a{color:var(--muted);text-decoration:none;font-size:.92rem;white-space:nowrap;padding:.2rem 0}
+nav a[aria-current="page"]{color:var(--ink)}
+.langs{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.2rem}
+.langs button{background:none;border:0;border-radius:999px;padding:.25rem .65rem;font-size:.85rem;color:var(--muted);font-weight:600}
+.langs button[aria-pressed="true"]{background:var(--forest);color:var(--on-forest)}
+
+/* type */
+main{padding:.5rem 0 2rem}
+h1{font-size:clamp(2.4rem,8vw,4.25rem);line-height:1.03;letter-spacing:-.035em;font-weight:300;margin:0 0 1rem}
+.lede{font-size:clamp(1.05rem,2.4vw,1.2rem);color:var(--muted);margin:0 0 2rem;max-width:34rem}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin:0 0 2.25rem;display:flex;justify-content:space-between;gap:1rem}
+.label{display:block;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted);margin:0 0 .6rem}
+
+/* hero */
+.hero{background:var(--forest);color:var(--on-forest);border-radius:1.5rem;padding:clamp(1.4rem,5vw,3.5rem);position:relative;overflow:hidden;
+  background-image:radial-gradient(circle at 88% 12%,rgba(228,237,180,.16),transparent 42%),radial-gradient(circle at 5% 100%,rgba(255,255,255,.05),transparent 45%)}
+.hero h1{max-width:44rem}
+.hero .lede,.hero .label,.hero .muted,.hero .eyebrow{color:var(--on-forest-muted)}
+.hero .picker{max-width:34rem}
+.hero .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:var(--on-forest)}
+.hero .chip:hover{border-color:var(--on-forest)}
+.hero .linkbtn{color:var(--lime)}
+
+/* search + chips */
+.search{display:flex;align-items:center;gap:.6rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:0 1.15rem}
+.search input{flex:1;border:0;background:transparent;padding:.95rem 0;min-width:0;outline:none;font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.9rem}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.45rem .95rem;font-size:.95rem}
+.chip:hover{border-color:var(--ink)}
+.linkbtn{background:none;border:0;padding:.75rem 0 0;color:var(--accent);font-weight:600;font-size:.95rem}
+
+/* sections */
+section{padding:3.5rem 0}
+.sec-lab{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1rem;margin-bottom:2rem}
+.sec-lab h2{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted);margin:0}
+.sec-lab h2::before{content:"// "}
+.sec-lab span{font-size:.72rem;color:var(--muted);font-weight:600}
+.rows{list-style:none;margin:0;padding:0;max-width:44rem}
+@media (min-width:56rem){.rows{margin-inline-start:auto}}
+.rows li{display:grid;grid-template-columns:2.75rem 1fr;gap:1rem;padding:1.35rem 0;border-top:1px solid var(--line)}
+.rows li:first-child{border-top:0;padding-top:0}
+.rows .n{width:2.25rem;height:2.25rem;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:.75rem;font-weight:600;color:var(--muted)}
+.rows b{display:block;font-weight:300;font-size:clamp(1.25rem,3.4vw,1.65rem);line-height:1.2;letter-spacing:-.015em}
+.rows .d{display:block;color:var(--muted);font-size:.98rem;margin-top:.3rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.85rem;border-radius:999px;padding-block:.4rem;padding-inline:1.15rem .4rem;font-size:.95rem;font-weight:500;text-decoration:none;border:1px solid transparent;background:var(--forest);color:var(--on-forest)}
+.btn .arr{display:grid;place-items:center;width:1.95rem;height:1.95rem;border-radius:.55rem;background:var(--on-forest);color:var(--forest);font-size:.95rem}
+[dir="rtl"] .btn .arr{transform:scaleX(-1)}
+.btn.light{background:var(--lime);color:var(--on-lime)}
+.btn.light .arr{background:var(--forest);color:var(--lime)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.ghost .arr{background:var(--forest);color:var(--on-forest)}
+.btn.act{flex:1;justify-content:center;padding:.75rem 1rem}
+.btn.full{width:100%;justify-content:space-between}
+
+/* doors */
+.doors{display:grid;gap:1rem}
+@media (min-width:44rem){.doors{grid-template-columns:1fr 1fr}}
+.door{border-radius:1.5rem;padding:clamp(1.5rem,4vw,2.25rem);min-height:15rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+.door h3{margin:0 0 .5rem;font-weight:300;font-size:clamp(1.7rem,4vw,2.2rem);letter-spacing:-.025em;line-height:1.1}
+.door p{margin:0;opacity:.75;max-width:22rem}
+.door.dark{background:var(--forest);color:var(--on-forest)}
+.door.lime{background:var(--lime);color:var(--on-lime)}
+.door .btn{align-self:flex-start}
+
+/* finder */
+.back{background:none;border:0;color:var(--muted);font-size:.95rem;padding:.25rem 0;margin:1rem 0 1.5rem}
+.grid{display:grid;gap:.75rem;grid-template-columns:1fr 1fr}
+@media (min-width:48rem){.grid{grid-template-columns:repeat(3,1fr)}}
+.tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:1.5rem;width:100%;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:1.25rem;padding:1.15rem;min-height:8.5rem;font-weight:300;font-size:1.2rem;letter-spacing:-.01em}
+.tile:hover{border-color:var(--ink)}
+.tile .ico{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--soft);font-size:1.2rem}
+.crumbs{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 1.5rem}
+.crumbs button{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;font-size:.92rem}
+.crumbs button::after{content:" ✎";color:var(--muted);font-size:.75rem}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.head h1{margin:0;font-size:clamp(2rem,6vw,3rem)}
+.share{background:none;border:1px solid var(--line);border-radius:999px;padding:.45rem .95rem;font-size:.92rem;white-space:nowrap;color:var(--ink)}
+.cards{display:grid;gap:.85rem}
+@media (min-width:48rem){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:1.25rem;padding:1.4rem;display:flex;flex-direction:column}
+.card .checked{align-self:flex-start;background:var(--lime);color:var(--on-lime);border-radius:999px;padding:.15rem .65rem;font-size:.78rem;font-weight:600;margin:0 0 1rem}
+.card h3{margin:0;font-weight:400;font-size:1.35rem;letter-spacing:-.015em;line-height:1.2}
+.card .area{margin:.2rem 0 1rem;color:var(--muted);font-size:.95rem}
+.badges{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:0 0 1.25rem;padding:0}
+.badges li{font-size:.8rem;border:1px solid var(--line);border-radius:.5rem;padding:.25rem .6rem}
+.actions{display:flex;gap:.5rem;margin-top:auto}
+.empty{border:1px dashed var(--line);border-radius:1.25rem;padding:1.4rem}
+.empty p{margin:0 0 .6rem;font-weight:300;font-size:1.25rem}
+.sos{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--forest);color:var(--on-forest);border-radius:999px;padding:.6rem .6rem .6rem 1.25rem;margin-top:1.25rem;font-size:.95rem}
+[dir="rtl"] .sos{padding:.6rem 1.25rem .6rem .6rem}
+.sos a{background:var(--lime);color:var(--on-lime);border-radius:999px;padding:.45rem .9rem;text-decoration:none;font-weight:600}
+.demo{font-size:.82rem;color:var(--muted);text-align:center;margin-top:1.25rem}
+
+/* form */
+.formwrap{max-width:40rem}
+@media (min-width:56rem){.formwrap{margin-inline-start:auto}}
+.field{margin-bottom:1.25rem}
+fieldset.field{border:0;padding:0;margin:0 0 1.25rem}
+.field input[type=text]{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:.85rem;padding:.85rem 1rem}
+.field input[type=text]:focus{border-color:var(--ink);outline:none}
+.opts{display:flex;flex-wrap:wrap;gap:.45rem}
+.opts label{display:flex;align-items:center;gap:.45rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.45rem .9rem;font-size:.95rem;cursor:pointer}
+.opts label:has(input:checked){background:var(--forest);color:var(--on-forest);border-color:var(--forest)}
+.opts input{accent-color:var(--lime);width:1rem;height:1rem;margin:0}
+.formwrap .done{background:var(--lime);color:var(--on-lime);border-radius:1.25rem;padding:1.75rem}
+.formwrap .done h3{margin:0 0 .35rem;font-weight:300;font-size:1.8rem}
+.formwrap .done p{margin:0}
+
+/* footer */
+footer{padding-top:2.5rem;color:var(--muted);font-size:.9rem;overflow:hidden}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);padding-top:1.25rem}
+.foot p{margin:.15rem 0}
+.foot nav{order:0;width:auto;flex-direction:column;gap:.3rem;margin:0}
+.bigmark{font-size:clamp(4.5rem,21vw,15rem);font-weight:300;letter-spacing:-.055em;line-height:.8;color:var(--soft);text-align:center;white-space:nowrap;margin-top:2.5rem;user-select:none}
+[dir="rtl"] .bigmark{direction:ltr}
+.toast{position:fixed;left:50%;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--forest);color:var(--on-forest);padding:.6rem 1.1rem;border-radius:999px;font-size:.92rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+
+/* ── v3 flow additions ── */
+nav{order:0;width:auto;margin-inline-start:auto}
+.globe{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.35rem .75rem;font-size:.85rem;font-weight:600}
+.globe svg{width:1.05rem;height:1.05rem}
+
+/* language screen */
+.langscreen{min-height:calc(100svh - 9rem);display:flex;flex-direction:column;justify-content:center;max-width:30rem;margin:0 auto;padding:2rem 0}
+.langscreen h1{font-size:clamp(1.9rem,6vw,2.6rem)}
+.langscreen h1 span{display:block;color:var(--muted)}
+.langlist{display:grid;gap:.6rem;margin-top:1rem}
+.langlist button{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:1.25rem;padding:1.2rem 1.35rem;font-size:1.35rem;font-weight:300;text-align:start}
+.langlist button:hover{border-color:var(--ink)}
+.langlist button span:last-child{color:var(--muted)}
+
+/* story montage */
+.story{position:relative;padding-top:.5rem}
+.beat{min-height:88svh;display:flex;align-items:center;padding:1rem 0}
+.frame{position:relative;width:100%;height:min(78svh,44rem);border-radius:1.5rem;overflow:hidden;background:var(--forest)}
+.frame .layer{position:absolute;inset:-18% 0;will-change:transform}
+.frame .cap{position:absolute;top:1rem;inset-inline-start:1rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,244,238,.6);border:1px dashed rgba(245,244,238,.35);border-radius:.4rem;padding:.2rem .5rem}
+.frame .line{position:absolute;inset-inline:clamp(1.25rem,5vw,3.5rem);bottom:clamp(1.25rem,5vw,3.5rem);margin:0;color:#F5F4EE;font-weight:300;font-size:clamp(1.9rem,6.5vw,3.75rem);line-height:1.08;letter-spacing:-.03em;max-width:46rem;
+  opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.beat.in .line{opacity:1;transform:none}
+.beat .count{position:absolute;top:1rem;inset-inline-end:1rem;font-size:.72rem;font-weight:600;color:rgba(245,244,238,.7)}
+.g1{background:radial-gradient(120% 80% at 20% 10%,#5B6B4E 0%,#2C3A2B 55%,#1B241A 100%)}
+.g2{background:radial-gradient(100% 90% at 80% 20%,#C9B98F 0%,#6E6A4E 40%,#2C3A2B 100%)}
+.g3{background:repeating-linear-gradient(135deg,#2C3A2B 0 18px,#334332 18px 36px)}
+.g4{background:radial-gradient(110% 90% at 70% 0%,#E4EDB4 0%,#8FA36F 35%,#2C3A2B 85%)}
+.story-end{padding:2rem 0 1rem;text-align:center}
+.skip{position:sticky;bottom:calc(1rem + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;z-index:5;pointer-events:none;margin-top:-3.5rem}
+.skip .btn{pointer-events:auto;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+@media (prefers-reduced-motion:reduce){.frame .line{opacity:1;transform:none;transition:none}.frame .layer{transform:none!important}}
+
+/* tool: stepper */
+.tool{display:grid;gap:2rem;padding:3.5rem 0 1rem;scroll-margin-top:1rem}
+@media (min-width:56rem){.tool{grid-template-columns:1fr 1.3fr;gap:3rem}.tool .intro{position:sticky;top:1.5rem;align-self:start}}
+.tool .intro h1{font-size:clamp(2.2rem,6vw,3.4rem)}
+.stepper{list-style:none;margin:0;padding:0}
+.step{border-top:1px solid var(--line);padding:1.25rem 0;scroll-margin-top:1rem}
+.step:first-child{border-top:0;padding-top:0}
+.st-head{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+.st-head .n{flex:none;width:2.1rem;height:2.1rem;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:.8rem;font-weight:600;color:var(--muted)}
+.st-head h3{margin:0;font-weight:400;font-size:1.2rem;letter-spacing:-.01em}
+.step.active .n{background:var(--forest);border-color:var(--forest);color:var(--on-forest)}
+.step.done .n{background:var(--lime);border-color:var(--lime);color:var(--on-lime)}
+.step.done .n::before{content:"✓"}
+.step.done .n span{display:none}
+.step.todo h3{color:var(--muted)}
+.edit{margin-inline-start:auto;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.35rem .85rem;font-size:.92rem}
+.edit::after{content:" ✎";color:var(--muted);font-size:.75rem}
+.st-body{padding-top:1.1rem;padding-inline-start:2.95rem}
+@media (max-width:30rem){.st-body{padding-inline-start:0}}
+.st-body .grid{grid-template-columns:1fr 1fr}
+.st-body .cards{grid-template-columns:1fr}
+.reshead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1rem}
+.reshead b{font-weight:300;font-size:1.6rem;letter-spacing:-.02em}
+
+/* about: ecosystem diagram */
+.eco{text-align:center}
+.eco-row{display:grid;gap:.5rem}
+.eco-row.top{grid-template-columns:repeat(7,1fr)}
+.eco-row.bottom{grid-template-columns:repeat(5,1fr)}
+.eco-item{display:flex;flex-direction:column;align-items:center;gap:.35rem;font-size:.78rem;color:var(--muted);line-height:1.2}
+.eco-item .ico{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:1.1rem}
+.eco-tag{border:1px solid var(--line);border-radius:999px;padding:.35rem .6rem;font-size:.8rem;background:var(--surface)}
+.eco svg{display:block;width:100%;height:4.5rem;color:var(--line)}
+.eco svg path{fill:none;stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.eco-mid{display:flex;align-items:center;gap:1rem;margin:.25rem 0}
+.eco-mid hr{flex:1;border:0;border-top:1.5px dashed var(--line);margin:0}
+.eco-mid b{font-weight:500;font-size:1.25rem;letter-spacing:-.01em;display:flex;align-items:center;gap:.45rem}
+.eco-lab{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted);text-align:start;margin:.75rem 0}
+@media (max-width:40rem){
+  .eco-row.top{grid-template-columns:repeat(4,1fr);row-gap:1rem}
+  .eco-row.bottom{grid-template-columns:repeat(3,1fr);row-gap:.6rem}
+  .eco svg{display:none}
+  .eco-mid{margin:1.5rem 0}
+}
+.split{display:grid;gap:2.5rem}
+@media (min-width:52rem){.split{grid-template-columns:1.3fr 1fr;align-items:start}}
+.split .rows{margin-inline-start:0}
+.split h2.small{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted);margin:0 0 1.25rem}
+.split h2.small::before{content:"// "}
+.split .block+.block{margin-top:2.5rem}
+.eco-mid .mk{display:none!important;width:1rem;height:1rem;border-radius:50%;border:2px solid var(--ink);position:relative;display:inline-block}.eco-mid .mk::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--ink)}
+
+/* ── v4: pinned scroll story ── */
+body.langmode header{display:none}
+body.langmode .langscreen{min-height:100svh}
+.langlist button.cur{border-color:var(--ink)}
+.story{position:relative;height:420svh;width:100vw;margin-inline:calc(50% - 50vw);margin-top:-.5rem}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden;background:#1B241A;color:#F5F4EE}
+
+.pin .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,21,16,.25) 0%,rgba(17,21,16,.05) 35%,rgba(17,21,16,.78) 100%);will-change:opacity}
+.pin .dim{position:absolute;inset:0;background:#111510;opacity:0;will-change:opacity}
+.pin .lines{position:absolute;inset-inline:clamp(1.25rem,6vw,5rem);bottom:clamp(6rem,16svh,9rem);max-width:48rem}
+.pin .lines p{position:absolute;bottom:0;inset-inline-start:0;margin:0;font-weight:300;font-size:clamp(2rem,6.5vw,4.25rem);line-height:1.06;letter-spacing:-.03em;opacity:0;will-change:opacity,transform;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.pin .meta{position:absolute;top:clamp(1rem,4vw,2rem);inset-inline:clamp(1.25rem,6vw,5rem);display:flex;justify-content:space-between;align-items:center;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:rgba(245,244,238,.8)}
+.pin .bar{position:absolute;inset-inline:clamp(1.25rem,6vw,5rem);bottom:clamp(4rem,11svh,6rem);height:2px;background:rgba(245,244,238,.22);border-radius:2px;overflow:hidden}
+.pin .bar i{display:block;height:100%;width:100%;background:var(--lime);transform-origin:left;transform:scaleX(0)}
+[dir="rtl"] .pin .bar i{transform-origin:right}
+.pin .foot-row{position:absolute;inset-inline:clamp(1.25rem,6vw,5rem);bottom:clamp(1rem,4svh,2rem);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.pin .credit{font-size:.7rem;color:rgba(245,244,238,.6)}
+.pin .credit a{color:inherit}
+.pin .cta{opacity:0;pointer-events:none;transition:opacity .3s}
+.pin .cta.on{opacity:1;pointer-events:auto}
+.pin .scrollhint{font-size:.85rem;color:rgba(245,244,238,.85);display:flex;align-items:center;gap:.4rem}
+
+/* ══ AidOasis brand layer (Brandbook) ══
+   Primary #2B3A67 · Secondary #F75C03 · Tertiary #00B1FF
+   Display: Made Mirage Bold (DM Serif Display stands in until the licensed font is self-hosted) · UI/body: Asap */
+:root{
+  --navy:#2B3A67; --navy-1:#222E55; --navy-2:#162045;
+  --orange:#F75C03; --orange-strong:#C24702; --sky:#00B1FF; --sky-1:#0089C7;
+  --bg:#FCFCFE; --surface:#FFFFFF; --ink:#1F2A50; --muted:#5E6782; --line:#E1E4EC; --soft:#F1F3F8;
+  --forest:#2B3A67; --on-forest:#FFFFFF; --on-forest-muted:#B8C0DA;
+  --lime:#00B1FF; --on-lime:#162045; --accent:#2B3A67;
+  --serif:"Made Mirage","DM Serif Display",Georgia,"Noto Naskh Arabic","Times New Roman",serif;
+  --sans:"Asap","Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171717; --surface:#212226; --ink:#F2F3F7; --muted:#A7ACBA; --line:#36383F; --soft:#2A2C32;
+    --forest:#2B3A67; --on-forest:#FFFFFF; --on-forest-muted:#B8C0DA;
+    --lime:#00B1FF; --on-lime:#162045; --accent:#00B1FF; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171717; --surface:#212226; --ink:#F2F3F7; --muted:#A7ACBA; --line:#36383F; --soft:#2A2C32;
+  --forest:#2B3A67; --on-forest:#FFFFFF; --on-forest-muted:#B8C0DA;
+  --lime:#00B1FF; --on-lime:#162045; --accent:#00B1FF; color-scheme:dark;
+}
+body{font-family:var(--sans)}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+
+/* signature brand stripe (sky over orange), as on every Brandbook page */
+body::after{content:"";position:fixed;inset-inline-end:0;top:30vh;bottom:0;width:6px;z-index:50;pointer-events:none;
+  background:linear-gradient(180deg,var(--sky) 0 50%,var(--orange) 50% 100%)}
+body.langmode::after{top:0}
+@media (max-width:40rem){body::after{width:4px}}
+
+/* wordmark + display type */
+.mark{font-family:var(--serif);font-weight:400;font-size:1.55rem;letter-spacing:-.01em;color:var(--ink)}
+.mark i{display:none}
+h1,.door h3,.reshead b,.formwrap .done h3,.eco-mid b,.langscreen h1,.bigmark,.pin .lines p,.empty p{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h1{line-height:1.08}
+.pin .lines p{letter-spacing:-.005em}
+.rows b{font-family:var(--sans);font-weight:500;letter-spacing:-.01em}
+.card h3{font-weight:600;letter-spacing:0}
+.eyebrow,.label,.sec-lab h2,.sec-lab span,.pin .meta,.split h2.small,.eco-lab{letter-spacing:.1em}
+
+/* hero: navy panel with Brandbook geometric accents */
+.hero{background-color:var(--navy);
+  background-image:radial-gradient(circle at 92% 8%,rgba(0,177,255,.22),transparent 40%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' fill='none' stroke-width='10'%3E%3Ccircle cx='150' cy='70' r='48' stroke='%2300B1FF' stroke-opacity='.55'/%3E%3Crect x='70' y='120' width='64' height='64' stroke='%23F75C03' stroke-opacity='.6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center,right -40px top -30px;background-size:auto,220px}
+@media (max-width:40rem){.hero{background-size:auto,150px;background-position:center,right -40px top -40px}}
+
+/* buttons: Brandbook primary (navy) / secondary (white, soft shadow) */
+.btn{border-radius:.75rem;font-family:var(--sans);font-weight:600;letter-spacing:.04em}
+.btn .arr{border-radius:.5rem}
+.btn.light{background:var(--sky);color:var(--navy-2)}
+.btn.light .arr{background:var(--navy);color:#fff}
+.btn.ghost{background:var(--surface);border-color:transparent;color:var(--ink);box-shadow:0 2px 10px rgba(43,58,103,.14)}
+.btn.ghost .arr{background:var(--navy);color:#fff}
+.door .btn.light{background:var(--sky)}
+.door.lime .btn{background:var(--navy);color:#fff}
+.door.lime .btn .arr{background:#fff;color:var(--navy)}
+
+/* inputs, chips, toggles */
+.search{border:1px solid var(--ink);border-radius:.75rem;background:var(--surface)}
+.hero .search{border-color:transparent}
+.search svg{width:1.15rem;height:1.15rem;color:var(--muted);flex:none}
+.chip,.crumbs button,.edit,.share,.opts label{border-radius:.6rem;letter-spacing:.02em}
+.chip:hover,.edit:hover,.share:hover{border-color:var(--sky);color:var(--sky-1)}
+.hero .chip:hover{color:#fff;border-color:var(--sky)}
+.hero .linkbtn{color:var(--sky)}
+.field input[type=text]{background:#F8F9FC;border:1px solid var(--line);border-radius:.6rem;box-shadow:inset 0 2px 3px rgba(43,58,103,.06)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .field input[type=text]{background:var(--soft)}}
+.opts label:has(input:checked){background:var(--navy);border-color:var(--navy);color:#fff}
+.opts input{accent-color:var(--sky)}
+.langs button[aria-pressed="true"]{background:var(--navy)}
+.globe{border-radius:.6rem}
+
+/* stepper + results */
+.step.active .n{background:var(--navy);border-color:var(--navy)}
+.step.done .n{background:var(--sky);border-color:var(--sky);color:var(--navy-2)}
+.card{border-radius:1rem;border-color:var(--line)}
+.card .checked{background:rgba(0,177,255,.14);color:var(--sky-1);border-radius:.5rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card .checked{color:var(--sky)}}
+.badges li{border-radius:.45rem}
+.sos{background:var(--navy);border-radius:.9rem}
+.sos a{background:var(--orange-strong);color:#fff;border-radius:.6rem}
+.formwrap .done{background:rgba(0,177,255,.14);color:var(--ink)}
+
+/* story */
+.pin{background:var(--navy-2)}
+.pin .bar i{background:var(--orange)}
+.pin .shade{background:linear-gradient(180deg,rgba(22,32,69,.35) 0%,rgba(22,32,69,.05) 35%,rgba(22,32,69,.82) 100%)}
+
+/* brand icons: navy line icon + sky geometric shape (Brandbook illustration style) */
+.bi{display:inline-block;width:1.05em;height:1.05em;vertical-align:-.15em;flex:none}
+.tile .ico,.eco-item .ico{width:3rem;height:3rem;border-radius:0;background:none;border:0;color:var(--ink);display:block}
+.tile .ico svg,.eco-item .ico svg{width:100%;height:100%}
+.tile{font-family:var(--sans);font-weight:500;font-size:1.15rem}
+.tile:hover{border-color:var(--sky)}
+.eco svg.fan{color:var(--line)}
+.bigmark{color:var(--soft)}
+
+/* ══ Header: overlay on the story, frosted solid everywhere else ══ */
+:root{--pad:1.25rem;--gut:max(var(--pad),calc((100vw - 70rem)/2 + var(--pad)));--hh:4.5rem}
+@media (min-width:48rem){:root{--pad:2rem}}
+html{scroll-padding-top:calc(var(--hh) + 1rem)}
+header{position:fixed;top:0;inset-inline:0;z-index:40;padding-top:env(safe-area-inset-top,0px);
+  background:rgba(252,252,254,.86);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid var(--line);transition:background-color .35s ease,border-color .35s ease}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header{background:rgba(23,23,23,.84)}}
+:root[data-theme="dark"] header{background:rgba(23,23,23,.84)}
+header .wrap{max-width:none;padding:0 var(--gut);height:var(--hh);flex-wrap:nowrap;padding-top:0;padding-bottom:0}
+.mark,nav a,.globe{transition:color .35s ease,background-color .35s ease,border-color .35s ease}
+body.overlay header{background:transparent!important;border-color:transparent!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.overlay .mark,body.overlay nav a,body.overlay nav a[aria-current="page"]{color:#fff}
+body.overlay .globe{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);color:#fff}
+main{padding-top:calc(var(--hh) + env(safe-area-inset-top,0px) + .5rem)}
+body.langmode main{padding-top:0}
+.story{margin-top:calc(-1 * (var(--hh) + env(safe-area-inset-top,0px) + .5rem))}
+.pin .meta{top:calc(var(--hh) + env(safe-area-inset-top,0px) + .75rem);justify-content:flex-end}
+.pin .lines,.pin .meta,.pin .bar,.pin .foot-row{inset-inline:var(--gut)}
+.tool{scroll-margin-top:var(--hh)}
+.step{scroll-margin-top:calc(var(--hh) + 1rem)}
+@media (min-width:56rem){.tool .intro{top:calc(var(--hh) + 1.5rem)}}
+.pin .foot-row .btn{white-space:nowrap}
+@media (max-width:40rem){.pin .foot-row{flex-wrap:wrap;row-gap:.5rem}.pin .credit{order:3;width:100%;text-align:end;font-size:.62rem}}
+
+/* live results */
+.chip small{color:var(--muted);margin-inline-start:.4rem;font-size:.78rem}
+.hero .chip small{color:var(--on-forest-muted)}
+.geo-l{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted);margin:1rem 0 0}
+.hero .geo-l{color:var(--on-forest-muted)}
+.card .checked.unv{background:rgba(247,92,3,.1);color:#B04402}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card .checked.unv{color:#FF8A47}}
+.nearH{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin:2rem 0 .25rem}
+.nearNote{color:var(--muted);font-size:.92rem;margin:0 0 1rem}
+.loading{padding:1.5rem 0}
+
+/* hero = search tool, first thing after language */
+.hero-tool{padding-top:2rem}
+@media (min-width:56rem){.hero-tool{padding-top:3.5rem}}
+.hero-tool .intro h1{font-size:clamp(2.3rem,6.5vw,3.6rem);line-height:1.06;max-width:30rem}
+.trust{list-style:none;margin:1.5rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.trust li{display:inline-flex;align-items:center;gap:.4rem;font-size:.92rem;font-weight:500;color:var(--ink);
+  background:rgba(0,177,255,.1);border:1px solid rgba(0,177,255,.35);border-radius:999px;padding:.4rem .8rem}
+.trust li .bi{color:var(--sky-1)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .trust li .bi{color:var(--sky)}}
+.org-door{min-height:auto;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.org-door h3{font-size:clamp(1.5rem,3.5vw,1.9rem)}
+main.wrap{padding-top:calc(var(--hh) + env(safe-area-inset-top,0px) + .5rem);padding-bottom:2rem}
+body.langmode main.wrap{padding-top:0}
+
+/* ══ About: scroll story (frame equidistant from every edge, resizes with the window) ══ */
+html.ab-snapping{scroll-snap-type:y mandatory}
+.ab-story{--g:clamp(.75rem,2.5vw,2.25rem);--in:clamp(1.25rem,3.5vw,2.75rem);
+  position:relative;height:calc(var(--beats) * 100svh);width:100vw;margin-inline:calc(50% - 50vw);margin-top:calc(1px - .5rem);padding:0}
+.ab-snap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;scroll-margin-top:-1rem}
+.ab-pin{position:sticky;top:calc(var(--hh) + 1px + env(safe-area-inset-top,0px));height:calc(100svh - var(--hh) - 1px - env(safe-area-inset-top,0px));padding:var(--g)}
+.ab-frame{position:relative;width:100%;height:100%;border-radius:1.25rem;overflow:hidden;background:#162045}
+.ab-photo{position:absolute;inset:-6% 0;background:center 40%/cover no-repeat;background-image:url("about-photo-1600.jpg");background-image:image-set(url("about-photo-1600.jpg") 1x,url("about-photo-2600.jpg") 2x);will-change:transform}
+.ab-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,32,69,.12) 0%,rgba(22,32,69,0) 35%,rgba(22,32,69,.88) 100%)}
+.ab-credit{position:absolute;top:var(--in);inset-inline-end:var(--in);font-size:.62rem;color:rgba(255,255,255,.55)}
+.ab-foot{position:absolute;inset-inline:var(--in);bottom:var(--in);display:flex;flex-direction:column;gap:1.1rem}
+.ab-lines{display:grid}
+.ab-lines p{grid-area:1/1;align-self:end;margin:0;max-width:24ch;color:#fff;font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.7rem,4.4vw,3.6rem);line-height:1.08;letter-spacing:-.005em;opacity:0;will-change:opacity,transform;text-shadow:0 2px 18px rgba(0,0,0,.2)}
+.ab-end{display:flex;flex-wrap:wrap;gap:.6rem;min-height:2.8rem;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease,visibility .35s}
+.ab-end.on{opacity:1;visibility:visible;transform:none}
+.ab-meta{display:flex;align-items:center;gap:1rem;color:rgba(255,255,255,.8);font-size:.85rem}
+.ab-skip{background:none;border:0;padding:0;color:inherit;font-size:inherit;font-weight:500;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+.ab-bar{flex:1;height:2px;background:rgba(255,255,255,.25);border-radius:2px;overflow:hidden}
+.ab-bar i{display:block;height:100%;background:var(--orange);transform-origin:left;transform:scaleX(0)}
+[dir="rtl"] .ab-bar i{transform-origin:right}
+.ab-num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ab-num b{color:#fff;font-weight:600}
+.after-story{scroll-snap-align:start}
+/* reduced motion: one still image, then the lines as a list */
+.ab-static{padding:1rem 0 2rem}
+.ab-static .ab-frame{height:55svh}
+.ab-static ol{list-style:none;margin:1.75rem 0;padding:0;display:grid;gap:1rem}
+.ab-static li{display:grid;grid-template-columns:2.75rem 1fr;gap:1rem;font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.9rem);line-height:1.2}
+.ab-static li span{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--muted);padding-top:.5rem}
+.ab-static .ab-end{opacity:1;visibility:visible;transform:none}
+
+/* home: supporting sections */
+.sec-lede{color:var(--muted);margin:-1rem 0 1.25rem;max-width:36rem}
+.grid.browse .tile{min-height:6.5rem}
+.split2{display:grid;gap:2rem}
+@media (min-width:56rem){.split2{grid-template-columns:1.4fr 1fr;align-items:start}.split2 .rows{margin-inline-start:0}}
+.sources{background:var(--soft);border-radius:1rem;padding:1.4rem}
+.sources h3{margin:0 0 .5rem;font-size:1.05rem;font-weight:600}
+.sources p{margin:0;color:var(--muted)}
+.chip.cover small{margin-inline-start:.45rem;color:var(--sky-1);font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.cover small{color:var(--sky)}}
+.faqs{max-width:44rem}
+.faq{border-top:1px solid var(--line);padding:.2rem 0}
+.faq:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;font-weight:500;font-size:1.08rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--muted);font-size:1.3rem;line-height:1}
+.faq[open] summary::after{content:"–"}
+.faq p{margin:0 0 1.1rem;color:var(--muted);max-width:38rem}
+
+/* ══ Home intro stage ══ */
+.stage{position:relative;height:calc(100svh - var(--hh) + 75svh);padding:0;margin-top:-.5rem}
+.stage-pin{position:sticky;top:var(--hh);height:calc(100svh - var(--hh));overflow:visible}
+.stage-copy{position:absolute;inset-inline:0;top:clamp(1.5rem,7svh,4.5rem);transform-origin:left top;will-change:opacity,transform}
+.stage-copy h1{font-size:clamp(2.6rem,7.4vw,5.6rem);line-height:1.02;max-width:14ch;margin:0 0 1rem}
+.stage-copy .lede{max-width:30rem}
+.stage-card{position:absolute;left:50%;top:50%;width:min(40rem,100%);max-height:calc(100% - 1.5rem);overflow:auto;
+  transform:translate(-50%,-50%);background:var(--surface);border:1px solid var(--line);border-radius:1.5rem;
+  padding:clamp(1.1rem,3vw,1.75rem);box-shadow:0 24px 60px -20px rgba(22,32,69,.28),0 4px 14px rgba(22,32,69,.06);will-change:transform,opacity}
+.stage-card .st-body{padding-inline-start:2.95rem}
+@media (max-width:30rem){.stage-card .st-body{padding-inline-start:0}}
+/* settled: after a city is picked, on shared links, and with reduced motion.
+   The hero keeps the first screen; the tool stays in the second spot, exactly where it was. */
+.stage.static{height:auto}
+.stage.static .stage-pin{position:relative;top:auto;height:auto;display:block;padding:0}
+.stage.static .stage-copy{position:relative;top:auto;inset:auto;opacity:1!important;transform:none!important;pointer-events:auto!important;
+  padding-top:clamp(1.5rem,7svh,4.5rem);min-height:calc(100svh - var(--hh) - 7rem)}
+.stage.static .stage-card{position:relative;left:auto;top:auto;transform:none!important;opacity:1!important;max-height:none;overflow:visible;
+  width:min(40rem,100%);margin:0 auto 1rem}
+
+/* hero v2: big words bottom-left, hairline rule, quiet promises */
+.stage-copy{top:auto;bottom:clamp(1.25rem,5svh,3rem);transform-origin:left bottom}
+.stage-copy h1{font-size:clamp(2.5rem,5.4vw,4.9rem);line-height:1.04;max-width:none;letter-spacing:-.015em;margin:0 0 1rem}
+.stage-copy .lede{font-size:clamp(1rem,1.6vw,1.2rem);max-width:34rem;margin:0}
+.hero-rule{border:0;border-top:1px solid var(--line);margin:clamp(1.5rem,4svh,2.5rem) 0 1rem}
+.stage-copy .trust{margin:0;gap:1.25rem}
+.stage-copy .trust li{background:none;border:0;padding:0;color:var(--muted);font-size:.9rem}
+.stage.static .stage-copy{display:flex;flex-direction:column;justify-content:flex-end;padding-top:0;padding-bottom:clamp(1.25rem,5svh,3rem);min-height:calc(100svh - var(--hh) - .5rem)}
+.stage.static .stage-card{margin-top:1.5rem}
+
+/* hero v3: everything up a touch, tool peeks at the bottom, with a hint */
+.stage-copy{bottom:clamp(8.5rem,22svh,13rem)}
+.stage-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:7rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--surface);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:.45rem 1rem;font-size:.88rem;font-weight:500;white-space:nowrap;
+  box-shadow:0 6px 18px -8px rgba(22,32,69,.25)}
+.stage-hint span{display:inline-block}
+@media (prefers-reduced-motion:no-preference){.stage-hint span{animation:hintbob 1.8s ease-in-out infinite}
+  @keyframes hintbob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}}
+.stage-hint:hover{color:var(--ink);border-color:var(--sky)}
+.stage:not(.arrived):not(.static) .stage-card{cursor:pointer}
+.stage:not(.arrived):not(.static) .stage-card:hover{box-shadow:0 28px 70px -20px rgba(22,32,69,.38),0 4px 14px rgba(22,32,69,.08)}
+.stage.static .stage-hint{display:none}
+.stage-copy{transform-origin:left top}
+
+/* lightweight hint: plain text with a shimmer and a bouncing chevron */
+.stage-hint{background:none!important;border:0!important;box-shadow:none!important;padding:.25rem .5rem;flex-direction:column;gap:.1rem;
+  color:var(--muted);font-size:.82rem;letter-spacing:.04em;font-weight:500}
+.stage-hint .hint-arr{display:block;width:1.1rem;height:1.1rem;color:var(--sky)}
+.stage-hint .hint-arr svg{width:100%;height:100%;display:block}
+@media (prefers-reduced-motion:no-preference){
+  .stage-hint .hint-txt{background:linear-gradient(90deg,var(--muted) 0%,var(--muted) 40%,var(--ink) 50%,var(--muted) 60%,var(--muted) 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hintshine 3.2s ease-in-out infinite}
+  .stage-hint .hint-arr{animation:hintdrop 1.6s cubic-bezier(.45,0,.55,1) infinite}
+  @keyframes hintshine{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+  @keyframes hintdrop{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(5px);opacity:1}}
+}
+.stage-hint:hover .hint-txt{color:var(--ink)}
+
+/* promises + rule live just above the tool */
+.stage-meta{position:absolute;inset-inline:0;will-change:opacity,transform}
+.stage-meta .trust{margin:0 0 .9rem;gap:1.25rem}
+.stage-meta .trust li{background:none;border:0;padding:0;color:var(--muted);font-size:.9rem}
+.stage-meta .hero-rule{margin:0}
+.stage.static .stage-meta{position:relative;top:auto;opacity:1!important;transform:none!important;margin-top:1.5rem}
+.stage.static .stage-copy{min-height:0;padding-top:clamp(2rem,10svh,6rem);padding-bottom:0}
+
+.more-loading{display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:.92rem;margin:1.25rem 0 0}
+.more-loading .dots{display:inline-flex;gap:4px}
+.more-loading .dots i{width:5px;height:5px;border-radius:50%;background:var(--sky);opacity:.35}
+@media (prefers-reduced-motion:no-preference){.more-loading .dots i{animation:dotp 1.1s ease-in-out infinite}.more-loading .dots i:nth-child(2){animation-delay:.15s}.more-loading .dots i:nth-child(3){animation-delay:.3s}
+  @keyframes dotp{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}}
+
+/* ══ result cards ══ */
+.rc-list{display:grid;gap:.85rem}
+.rc{background:var(--surface);border:1px solid var(--line);border-radius:1.1rem;padding:1.1rem;box-shadow:0 10px 30px -22px rgba(22,32,69,.4)}
+.rc.is-best{border:2px solid var(--sky)}
+.rc.is-unchecked{border-style:dashed}
+.rc-top{display:flex;flex-wrap:wrap;gap:.4rem}
+.rc-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:700;border-radius:999px;padding:.18rem .6rem}
+.rc-badge .bi{width:.9em;height:.9em}
+.rc-best{background:var(--sky);color:var(--navy-2)}
+.rc-ok{background:rgba(0,177,255,.14);color:var(--sky-1)}
+.rc-warn{background:rgba(247,92,3,.12);color:#B04402}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .rc-ok{color:var(--sky)}:root:not([data-theme="light"]) .rc-warn{color:#FF8A47}}
+.rc-name{margin:.6rem 0 0;font-size:1.15rem;line-height:1.25;font-weight:700}
+.rc-name.serif{font-family:var(--serif);font-weight:400;font-size:1.4rem}
+.rc-meta{margin:.2rem 0 0;color:var(--muted);font-size:.9rem}
+.rc-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}
+.rc-chips span{font-size:.8rem;border:1px solid var(--line);border-radius:.5rem;padding:.2rem .55rem}
+.rc-actions{display:flex;gap:.5rem;margin-top:1rem}
+.rc-actions .btn{min-height:2.85rem;border-radius:.75rem;justify-content:center;padding:.6rem .9rem}
+.rc-actions{flex-wrap:wrap}.rc-call{flex:1 1 13rem}.rc-wa{flex:1 1 8rem}.rc-actions .btn{white-space:nowrap}
+.rc-num{font-weight:500;opacity:.85;font-variant-numeric:tabular-nums}
+.rc-links{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1rem;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--line)}
+.rc-links a,.rc-links button{display:inline-flex;align-items:center;gap:.35rem;background:none;border:0;padding:.25rem 0;color:var(--muted);font:inherit;font-size:.88rem;font-weight:600;text-decoration:none;cursor:pointer}
+.rc-links a:hover,.rc-links button:hover{color:var(--ink)}
+.rc-links [aria-expanded="true"]{color:var(--sky-1)}
+.rc-links .rc-wrong{margin-inline-start:auto;font-weight:500;font-size:.8rem}
+.rc-links .rc-wrong:disabled{cursor:default;color:var(--sky-1)}
+.rc-sheet{margin-top:.75rem;background:var(--soft);border-radius:.85rem;padding:.75rem .8rem}
+@media (prefers-reduced-motion:no-preference){.rc-sheet:not([hidden]){animation:rcin .22s ease-out}@keyframes rcin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}}
+.rc-sheet-k{font-size:.72rem;color:var(--muted);margin-bottom:.3rem}
+.rc-msg{font-size:.88rem;line-height:1.4}
+.rc-url{color:var(--sky-1);word-break:break-all}
+.rc-sheet-actions{display:flex;gap:.5rem;margin-top:.6rem}
+.rc-sheet-actions .btn{flex:1;min-height:2.5rem;font-size:.88rem;justify-content:center;border-radius:.7rem;padding:.5rem .7rem}
+.rc-sheet-actions .rc-more{flex:0 0 2.6rem}
+
+.rc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.rc-share{flex:none;display:inline-flex;align-items:center;gap:.35rem;background:var(--surface);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.3rem .75rem;min-height:2rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+.rc-share .bi{width:.95em;height:.95em}
+.rc-share:hover{color:var(--ink);border-color:var(--sky)}
+.rc-share[aria-expanded="true"]{color:var(--sky-1);border-color:var(--sky)}
+
+.rc-report{margin-top:.75rem;background:var(--soft);border-radius:.85rem;padding:.75rem .8rem}
+@media (prefers-reduced-motion:no-preference){.rc-report{animation:rcin .22s ease-out}}
+.rc-reasons{display:flex;flex-wrap:wrap;gap:.4rem}
+.rc-reasons button{font:inherit;font-size:.85rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:.6rem;padding:.45rem .7rem;cursor:pointer;min-height:2.5rem}
+.rc-reasons button:hover{border-color:var(--sky)}
+.rc-thanks{display:flex;align-items:center;gap:.4rem;margin:0;font-size:.9rem;color:var(--ok,#137A4B);font-weight:600}
+.rc-links .rc-wrong[aria-expanded="true"]{color:var(--sky-1)}
+.rc-links .rc-wrong:hover{color:#B04402}
+.rc-links .rc-wrong .bi{width:.95em;height:.95em}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#" id="mark"><i aria-hidden="true"></i>AidOasis</a>
+    <nav id="nav"></nav>
+    <button class="globe" id="globe" type="button"></button>
+  </div>
+</header>
+<main class="wrap" id="app" aria-live="polite"></main>
+<footer><div class="wrap"><div class="foot" id="foot"></div><div class="bigmark" aria-hidden="true">AidOasis</div></div></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+
+const LANGS={en:{label:"EN",name:"English",dir:"ltr"},es:{label:"ES",name:"Español",dir:"ltr"},ar:{label:"ع",name:"العربية",dir:"rtl"}};
+const T={
+en:{reportH:"What’s wrong?",reason_phone:"Wrong phone number",reason_closed:"Closed or moved",reason_hours:"Wrong hours",reason_papers:"Asked for papers or money",reason_other:"Something else",reportThanks:"Thanks. We’ll check this listing.",bestMatch:"Best match for you",shareH:"Send this to a friend",copy:"Copy",wrong:"Flag",more:"More ways to share",moreLoading:"Looking for more places nearby…",stageHint:"Tap to search, or scroll",placeOne:"1 place",needsH:"Browse by need",needsP:"Pick what you need. Then tell us where you are.",pickCityFirst:"Where are you now? Pick a city to see places.",howD:["Type your city or pick one from the list. Your location is never saved.", "Legal help, a place to stay, food, health care, work or school.", "Every listing shows a phone number, what to expect and when it was last checked."],trustH:"Why trust AidOasis",sourcesH:"Where our listings come from",sourcesP:"We start from official lists, such as state-funded legal services, county refugee offices and city programs. Then a real person reviews every listing and calls to confirm it.",whereH:"Where we work",whereP:"We’re starting in Southern California. Anywhere else, you’ll still see places nearby from OpenStreetMap, marked “Not yet checked.”",placesN:"places",faqH:"Questions",faq:[["Is AidOasis free?", "Yes. AidOasis is free for everyone, and every listing says whether the service itself is free."], ["Will anyone know I used it?", "No. AidOasis never asks your name or status, and there’s nothing to sign up for. We only count searches anonymously."], ["How do you check places?", "We start from official lists, then a person reviews every listing. Places marked “✓ Checked” were confirmed by phone, with the date shown."], ["What does “Not yet checked” mean?", "We found the place on a trusted list but haven’t called yet. Call before you go."], ["In danger right now?", "Call your local emergency number. In the US and Mexico it’s 911. In most of Europe and in Türkiye it’s 112."]],storyLabel:"Our story",skipStory:"Skip story ↓",findCta:"Find help near you",abStory:["More than 100 million people have had to leave home.","Help is out there, but it’s scattered and hard to find.","So people ask a friend, a church, a stranger online.","AidOasis puts help in one place. Checked by a real person."],checkedPlain:"✓ Checked by a real person",
+  nav:["Find help","For organizations","About"],
+  heroH:"Free help near you. Checked by a real person.",
+  heroP:"Legal help, shelter, food, health care, work, and schooling. We call every place to make sure it’s open.",
+  chips:["No sign-up", "We never ask your name or status", "Checked by a real person"],
+  where:"Where are you now?", search:"City or country", popular:"Popular places",
+  locate:"Use my location (never saved)", locating:"Finding your city…", nearNone:"No city near you yet. Pick one above.", noMatch:"No match yet. Try another spelling.",
+  promiseH:"Our promise",
+  promise:[["No sign-up", "Open it and use it. Nothing to download."], ["AidOasis never asks your name or status.", "We don’t need to know who you are to help you find a place."], ["Checked by a real person.", "We call every place and show when we last checked."]],
+  howH:"How it works", how:["Choose where you are","Choose what you need","Call or message them directly"],
+  helpH:"Need help?", helpP:"Find services in your city, in your language.", helpCta:"Find help",
+  orgH:"Run a service?", orgP:"List it for free and reach people who need it.", orgCta:"List your service",
+  need:"What do you need?", back:"Back", count:n=>n===1?"1 place can help":`${n} places can help`,
+  share:"Share", copied:"Link copied", free:"Free", nopapers:"No papers needed", checked:d=>`✓ Checked ${d}`,
+  call:"Call", wa:"WhatsApp", sos:n=>`Emergency? Call ${n}`,
+  soon:c=>`We’re still checking places in ${c}.`, soonNeed:"No checked places for this need here yet.", unhcr:"Official refugee information (UNHCR) ↗",
+  demo:"Preview: sample listings, not real services yet.",
+  orgsH:"Reach people who need your services.", orgsP:"Help like yours exists, but people can’t find it: it’s scattered and often out of date. List your service for free in one trusted place. We confirm every listing by phone before it goes live.",
+  benefitsH:"What you get",
+  benefits:[["People find you in their language","Your service appears in Spanish, English and Arabic."],["Fewer calls you can’t help","Clear eligibility, shown up front."],["Free, always","No fees for organizations or for the people you serve."]],
+  stepsH:"How listing works", steps:["Tell us about your service (5 minutes)","We call to verify","You go live. We check in every month."],
+  formH:"List your service",
+  f:{org:"Organization name",name:"Your name",reach:"Email or phone",city:"City",offer:"What do you offer?",langs:"Languages your team speaks",cost:"Is it free?",papers:"Do you ask about immigration status?",site:"Website (optional)",submit:"Send for review"},
+  yes:"Yes", no:"No", some:"Sometimes",
+  doneH:"Thank you.", doneP:"We’ll contact you within a week to verify your listing.",
+  aboutH:"A trusted place to find help.",
+  aboutP:["More than 100 million people have been forced from their homes. Help exists: a clinic, a shelter, a lawyer who works for free. But it’s scattered, hard to find and often out of date.", "AidOasis puts help in one place, in your language. We call every place to make sure it’s open, so each listing is checked by a real person. We are a nonprofit, and we build AidOasis together with people who have been displaced."],
+  verifyH:"How we check places", verify:["We confirm each place is open and taking people.","We ask if it is free and if it asks about papers.","We check again every month and show the date."],
+  privH:"Your privacy", priv:["AidOasis never asks your name, phone number or status.", "Your location never leaves your phone.", "We count searches anonymously, only to see where help is missing."],
+  foot:["AidOasis is a nonprofit.","No ads. No data sold."]
+},
+es:{reportH:"¿Qué está mal?",reason_phone:"Número equivocado",reason_closed:"Cerró o se mudó",reason_hours:"Horario equivocado",reason_papers:"Pidieron papeles o dinero",reason_other:"Otra cosa",reportThanks:"Gracias. Revisaremos este servicio.",bestMatch:"La mejor opción para ti",shareH:"Envíaselo a alguien",copy:"Copiar",wrong:"Reportar",more:"Más formas de compartir",moreLoading:"Buscando más lugares cerca…",stageHint:"Toca para buscar, o desliza",placeOne:"1 lugar",needsH:"Busca por necesidad",needsP:"Elige lo que necesitas. Luego dinos dónde estás.",pickCityFirst:"¿Dónde estás ahora? Elige una ciudad para ver lugares.",howD:["Escribe tu ciudad o elige una de la lista. Tu ubicación nunca se guarda.", "Ayuda legal, dónde quedarte, comida, salud, trabajo o escuela.", "Cada lugar muestra un teléfono, qué esperar y cuándo se revisó por última vez."],trustH:"Por qué confiar en AidOasis",sourcesH:"De dónde vienen nuestros servicios",sourcesP:"Partimos de listas oficiales, como servicios legales financiados por el estado, oficinas de refugiados del condado y programas de la ciudad. Luego una persona real revisa cada servicio y llama para confirmarlo.",whereH:"Dónde trabajamos",whereP:"Empezamos en el sur de California. En cualquier otro lugar verás lugares cercanos de OpenStreetMap, marcados “Sin revisar”.",placesN:"lugares",faqH:"Preguntas",faq:[["¿AidOasis es gratis?", "Sí. AidOasis es gratis para todos, y cada servicio indica si también es gratis."], ["¿Alguien sabrá que lo usé?", "No. AidOasis nunca pide tu nombre ni tu estatus, y no hay que registrarse. Solo contamos las búsquedas de forma anónima."], ["¿Cómo revisan los lugares?", "Partimos de listas oficiales y una persona revisa cada servicio. Los lugares con “✓ Revisado” se confirmaron por teléfono, con la fecha a la vista."], ["¿Qué significa “Sin revisar”?", "Encontramos el lugar en una lista confiable, pero aún no hemos llamado. Llama antes de ir."], ["¿Estás en peligro ahora?", "Llama al número de emergencias local. En EE. UU. y México es el 911. En la mayor parte de Europa y en Turquía es el 112."]],storyLabel:"Nuestra historia",skipStory:"Saltar historia ↓",findCta:"Encuentra ayuda cerca de ti",abStory:["Más de 100 millones de personas han tenido que dejar su hogar.","La ayuda existe, pero está dispersa y es difícil de encontrar.","Así que la gente le pregunta a un amigo, a una iglesia, a un desconocido en internet.","AidOasis reúne la ayuda en un solo lugar. Revisada por una persona real."],checkedPlain:"✓ Revisado por una persona real",
+  nav:["Buscar ayuda","Para organizaciones","Nosotros"],
+  heroH:"Ayuda gratis cerca de ti. Revisada por una persona real.",
+  heroP:"Ayuda legal, albergue, comida, salud, trabajo y escuela. Llamamos a cada lugar para confirmar que está abierto.",
+  chips:["Sin registro", "Nunca pedimos tu nombre ni tu estatus", "Revisado por una persona real"],
+  where:"¿Dónde estás ahora?", search:"Ciudad o país", popular:"Lugares frecuentes",
+  locate:"Usar mi ubicación (nunca se guarda)", locating:"Buscando tu ciudad…", nearNone:"Aún no hay una ciudad cerca de ti. Elige una arriba.", noMatch:"Sin resultados. Prueba otra forma de escribirlo.",
+  promiseH:"Nuestra promesa",
+  promise:[["Sin registro", "Ábrelo y úsalo. No hay que descargar nada."], ["AidOasis nunca pide tu nombre ni tu estatus.", "No necesitamos saber quién eres para ayudarte a encontrar un lugar."], ["Revisado por una persona real.", "Llamamos a cada lugar y mostramos cuándo lo revisamos."]],
+  howH:"Cómo funciona", how:["Elige dónde estás","Elige qué necesitas","Llama o escríbeles directamente"],
+  helpH:"¿Necesitas ayuda?", helpP:"Encuentra servicios en tu ciudad, en tu idioma.", helpCta:"Buscar ayuda",
+  orgH:"¿Ofreces un servicio?", orgP:"Publícalo gratis y llega a quien lo necesita.", orgCta:"Publica tu servicio",
+  need:"¿Qué necesitas?", back:"Atrás", count:n=>n===1?"1 lugar puede ayudarte":`${n} lugares pueden ayudarte`,
+  share:"Compartir", copied:"Enlace copiado", free:"Gratis", nopapers:"Sin pedir papeles", checked:d=>`✓ Revisado ${d}`,
+  call:"Llamar", wa:"WhatsApp", sos:n=>`¿Emergencia? Llama al ${n}`,
+  soon:c=>`Todavía estamos revisando lugares en ${c}.`, soonNeed:"Aún no hay lugares revisados para esto aquí.", unhcr:"Información oficial para refugiados (ACNUR) ↗",
+  demo:"Vista previa: lugares de ejemplo, todavía no son servicios reales.",
+  orgsH:"Llega a las personas que necesitan tus servicios.", orgsP:"La ayuda como la tuya existe, pero la gente no la encuentra: está dispersa y muchas veces desactualizada. Publica tu servicio gratis en un lugar confiable. Confirmamos cada servicio por teléfono antes de publicarlo.",
+  benefitsH:"Lo que obtienes",
+  benefits:[["Te encuentran en su idioma","Tu servicio aparece en español, inglés y árabe."],["Menos llamadas que no puedes atender","Requisitos claros, a la vista."],["Gratis, siempre","Sin costo para las organizaciones ni para las personas que atienden."]],
+  stepsH:"Cómo publicar", steps:["Cuéntanos sobre tu servicio (5 minutos)","Te llamamos para verificar","Se publica. Te contactamos cada mes."],
+  formH:"Publica tu servicio",
+  f:{org:"Nombre de la organización",name:"Tu nombre",reach:"Correo o teléfono",city:"Ciudad",offer:"¿Qué ofrecen?",langs:"Idiomas que habla tu equipo",cost:"¿Es gratis?",papers:"¿Preguntan por el estatus migratorio?",site:"Sitio web (opcional)",submit:"Enviar para revisión"},
+  yes:"Sí", no:"No", some:"A veces",
+  doneH:"Gracias.", doneP:"Te contactaremos en una semana para verificar tu servicio.",
+  aboutH:"Un lugar confiable para encontrar ayuda.",
+  aboutP:["Más de 100 millones de personas han tenido que dejar sus hogares. La ayuda existe: una clínica, un albergue, un abogado que trabaja gratis. Pero está dispersa, es difícil de encontrar y muchas veces está desactualizada.", "AidOasis reúne la ayuda en un solo lugar, en tu idioma. Llamamos a cada lugar para confirmar que está abierto, así cada servicio es revisado por una persona real. Somos una organización sin fines de lucro y construimos AidOasis junto con personas desplazadas."],
+  verifyH:"Cómo revisamos los lugares", verify:["Confirmamos que cada lugar está abierto y recibe personas.","Preguntamos si es gratis y si piden papeles.","Lo revisamos de nuevo cada mes y mostramos la fecha."],
+  privH:"Tu privacidad", priv:["AidOasis nunca pide tu nombre, teléfono ni estatus.", "Tu ubicación nunca sale de tu teléfono.", "Contamos las búsquedas de forma anónima, solo para ver dónde falta ayuda."],
+  foot:["AidOasis es una organización sin fines de lucro.","Sin anuncios. No vendemos datos."]
+},
+ar:{reportH:"ما المشكلة؟",reason_phone:"رقم هاتف خاطئ",reason_closed:"مغلق أو انتقل",reason_hours:"مواعيد خاطئة",reason_papers:"طلبوا أوراقاً أو مالاً",reason_other:"شيء آخر",reportThanks:"شكراً. سنراجع هذه الخدمة.",bestMatch:"الخيار الأنسب لك",shareH:"أرسلها إلى صديق",copy:"نسخ",wrong:"إبلاغ",more:"طرق أخرى للمشاركة",moreLoading:"جارٍ البحث عن أماكن أخرى قريبة…",stageHint:"اضغط للبحث، أو مرّر للأسفل",placeOne:"مكان واحد",needsH:"تصفّح حسب الحاجة",needsP:"اختر ما تحتاجه، ثم أخبرنا أين أنت.",pickCityFirst:"أين أنت الآن؟ اختر مدينة لترى الأماكن.",howD:["اكتب مدينتك أو اختر واحدة من القائمة. لا يُحفظ موقعك أبداً.", "مساعدة قانونية، مكان للإقامة، طعام، رعاية صحية، عمل أو مدرسة.", "كل مكان يعرض رقم هاتف وما يمكن توقعه ومتى تم التحقق منه آخر مرة."],trustH:"لماذا تثق في AidOasis",sourcesH:"من أين تأتي قوائمنا",sourcesP:"نبدأ من قوائم رسمية، مثل الخدمات القانونية الممولة من الولاية ومكاتب اللاجئين في المقاطعة وبرامج المدينة. ثم يراجع شخص حقيقي كل خدمة ويتصل للتأكد منها.",whereH:"أين نعمل",whereP:"نبدأ في جنوب كاليفورنيا. في أي مكان آخر، سترى أماكن قريبة من OpenStreetMap مع عبارة «لم يتم التحقق».",placesN:"أماكن",faqH:"أسئلة",faq:[["هل AidOasis مجاني؟", "نعم. AidOasis مجاني للجميع، وكل خدمة توضّح إن كانت مجانية أيضاً."], ["هل سيعرف أحد أنني استخدمته؟", "لا. AidOasis لا تسأل أبداً عن اسمك أو وضعك، ولا يوجد تسجيل. نحسب عمليات البحث دون أي هوية فقط."], ["كيف تتحققون من الأماكن؟", "نبدأ من قوائم رسمية، ثم يراجع شخص كل خدمة. الأماكن التي عليها «✓ تحقق منها شخص» تم تأكيدها هاتفياً مع عرض التاريخ."], ["ماذا تعني «لم يتم التحقق»؟", "وجدنا المكان في قائمة موثوقة لكننا لم نتصل بعد. اتصل قبل الذهاب."], ["هل أنت في خطر الآن؟", "اتصل برقم الطوارئ المحلي. في الولايات المتحدة والمكسيك هو 911، وفي معظم أوروبا وتركيا هو 112."]],storyLabel:"قصتنا",skipStory:"تخطَّ القصة ↓",findCta:"اعثر على مساعدة بالقرب منك",abStory:["أُجبر أكثر من 100 مليون شخص على مغادرة منازلهم.","المساعدة موجودة، لكنها متفرقة ويصعب العثور عليها.","فيسأل الناس صديقاً، أو مكان عبادة، أو غريباً على الإنترنت.","تجمع AidOasis المساعدة في مكان واحد. تحقق منها شخص حقيقي."],checkedPlain:"✓ تحقق منها شخص حقيقي",
+  nav:["ابحث عن مساعدة","للمنظمات","من نحن"],
+  heroH:"مساعدة مجانية بالقرب منك. تحقق منها شخص حقيقي.",
+  heroP:"مساعدة قانونية، مأوى، طعام، رعاية صحية، عمل وتعليم. نتصل بكل مكان للتأكد من أنه مفتوح.",
+  chips:["بدون تسجيل", "لا نسأل أبداً عن اسمك أو وضعك", "تحقق منها شخص حقيقي"],
+  where:"أين أنت الآن؟", search:"مدينة أو بلد", popular:"أماكن شائعة",
+  locate:"استخدم موقعي (لا يُحفظ أبداً)", locating:"جارٍ تحديد مدينتك…", nearNone:"لا توجد مدينة قريبة منك بعد. اختر من الأعلى.", noMatch:"لا نتائج. جرّب كتابة أخرى.",
+  promiseH:"وعدنا",
+  promise:[["بدون تسجيل", "افتحه واستخدمه. لا شيء للتحميل."], ["AidOasis لا تسأل أبداً عن اسمك أو وضعك.", "لا نحتاج أن نعرف من أنت لنساعدك في إيجاد مكان."], ["تحقق منها شخص حقيقي.", "نتصل بكل مكان ونعرض تاريخ آخر تحقق."]],
+  howH:"كيف يعمل", how:["اختر مكانك","اختر ما تحتاجه","اتصل بهم أو راسلهم مباشرة"],
+  helpH:"تحتاج مساعدة؟", helpP:"اعثر على خدمات في مدينتك، بلغتك.", helpCta:"ابحث عن مساعدة",
+  orgH:"تقدّم خدمة؟", orgP:"أضفها مجاناً وتواصل مع من يحتاجها.", orgCta:"أضف خدمتك",
+  need:"ماذا تحتاج؟", back:"رجوع", count:n=>`أماكن يمكنها مساعدتك: ${n}`,
+  share:"مشاركة", copied:"تم نسخ الرابط", free:"مجاني", nopapers:"لا يطلبون أوراقاً", checked:d=>`✓ تم التحقق ${d}`,
+  call:"اتصال", wa:"واتساب", sos:n=>`حالة طوارئ؟ اتصل بـ ${n}`,
+  soon:c=>`ما زلنا نتحقق من الأماكن في ${c}.`, soonNeed:"لا توجد أماكن موثّقة لهذا الطلب هنا بعد.", unhcr:"معلومات رسمية للاجئين (المفوضية) ↗",
+  demo:"معاينة: أماكن للتوضيح وليست خدمات حقيقية بعد.",
+  orgsH:"تواصل مع الأشخاص الذين يحتاجون خدماتك.", orgsP:"المساعدة مثل التي تقدمها موجودة، لكن الناس لا يجدونها: فهي متفرقة وغالباً قديمة. أضف خدمتك مجاناً في مكان واحد موثوق. نتأكد من كل خدمة هاتفياً قبل نشرها.",
+  benefitsH:"ما الذي تحصل عليه",
+  benefits:[["يجدونك بلغتهم","تظهر خدمتك بالإسبانية والإنجليزية والعربية."],["مكالمات أقل لا يمكنك تلبيتها","شروط واضحة تظهر من البداية."],["مجاني دائماً","بدون رسوم للمنظمات أو للأشخاص الذين تخدمهم."]],
+  stepsH:"كيف يتم الإدراج", steps:["أخبرنا عن خدمتك (5 دقائق)","نتصل بك للتحقق","تُنشر خدمتك. نتواصل معك كل شهر."],
+  formH:"أضف خدمتك",
+  f:{org:"اسم المنظمة",name:"اسمك",reach:"البريد الإلكتروني أو الهاتف",city:"المدينة",offer:"ماذا تقدّمون؟",langs:"اللغات التي يتحدثها فريقك",cost:"هل الخدمة مجانية؟",papers:"هل تسألون عن وضع الهجرة؟",site:"الموقع الإلكتروني (اختياري)",submit:"أرسل للمراجعة"},
+  yes:"نعم", no:"لا", some:"أحياناً",
+  doneH:"شكراً.", doneP:"سنتواصل معك خلال أسبوع للتحقق من خدمتك.",
+  aboutH:"مكان موثوق للعثور على المساعدة.",
+  aboutP:["أُجبر أكثر من 100 مليون شخص على ترك منازلهم. المساعدة موجودة: عيادة، مأوى، محامٍ يعمل مجاناً. لكنها متفرقة ويصعب العثور عليها وغالباً ما تكون قديمة.", "تجمع AidOasis المساعدة في مكان واحد، بلغتك. نتصل بكل مكان للتأكد من أنه مفتوح، فكل خدمة تحقق منها شخص حقيقي. نحن منظمة غير ربحية، ونبني AidOasis مع أشخاص عاشوا تجربة النزوح."],
+  verifyH:"كيف نتحقق من الأماكن", verify:["نتأكد أن كل مكان مفتوح ويستقبل الناس.","نسأل إن كانت الخدمة مجانية وإن كانوا يطلبون أوراقاً.","نعيد التحقق كل شهر ونعرض التاريخ."],
+  privH:"خصوصيتك", priv:["AidOasis لا تسأل أبداً عن اسمك أو رقم هاتفك أو وضعك.", "موقعك لا يغادر هاتفك أبداً.", "نحسب عمليات البحث دون أي هوية، فقط لنعرف أين تنقص المساعدة."],
+  foot:["AidOasis منظمة غير ربحية.","بدون إعلانات. لا نبيع البيانات."]
+}};
+const NEEDS=[
+  ["legal","legal",{en:"Legal help",es:"Ayuda legal",ar:"مساعدة قانونية"}],
+  ["housing","housing",{en:"A place to stay",es:"Dónde quedarme",ar:"مكان للإقامة"}],
+  ["food","food",{en:"Food",es:"Comida",ar:"طعام"}],
+  ["health","health",{en:"Health",es:"Salud",ar:"صحة"}],
+  ["work","work",{en:"Work",es:"Trabajo",ar:"عمل"}],
+  ["school","school",{en:"School",es:"Escuela",ar:"مدرسة"}]
+];
+const LANG_NAMES={es:{en:"Spanish",es:"Español",ar:"الإسبانية"},en:{en:"English",es:"Inglés",ar:"الإنجليزية"},ar:{en:"Arabic",es:"Árabe",ar:"العربية"}};
+
+/* DATA (sample; replace with your Google Sheet) */
+const CITIES={
+  longbeach:{n:{en:"Long Beach",es:"Long Beach",ar:"لونغ بيتش"},c:{en:"USA",es:"EE. UU.",ar:"الولايات المتحدة"},sos:"911",ll:[33.77,-118.193],a:["long beach","lb","seal beach","signal hill","lakewood","لونغ بيتش"]},
+  losangeles:{n:{en:"Los Angeles",es:"Los Ángeles",ar:"لوس أنجلوس"},c:{en:"USA",es:"EE. UU.",ar:"الولايات المتحدة"},sos:"911",ll:[34.05,-118.24],a:["la","los angeles","usa","estados unidos","california","لوس انجلوس","امريكا"]},
+  tijuana:{n:{en:"Tijuana",es:"Tijuana",ar:"تيخوانا"},c:{en:"Mexico",es:"México",ar:"المكسيك"},sos:"911",ll:[32.51,-117.04],a:["tj","tijuana","mexico","baja","تيخوانا","المكسيك"]},
+  cdmx:{n:{en:"Mexico City",es:"Ciudad de México",ar:"مكسيكو سيتي"},c:{en:"Mexico",es:"México",ar:"المكسيك"},sos:"911",ll:[19.43,-99.13],a:["cdmx","df","mexico city","ciudad de mexico","mexico","مكسيكو","المكسيك"]},
+  madrid:{n:{en:"Madrid",es:"Madrid",ar:"مدريد"},c:{en:"Spain",es:"España",ar:"إسبانيا"},sos:"112",ll:[40.42,-3.70],a:["madrid","spain","espana","مدريد","اسبانيا"]},
+  berlin:{n:{en:"Berlin",es:"Berlín",ar:"برلين"},c:{en:"Germany",es:"Alemania",ar:"ألمانيا"},sos:"112",ll:[52.52,13.40],a:["berlin","germany","alemania","deutschland","برلين","المانيا"]},
+  gaziantep:{n:{en:"Gaziantep",es:"Gaziantep",ar:"غازي عنتاب"},c:{en:"Türkiye",es:"Turquía",ar:"تركيا"},sos:"112",ll:[37.07,37.38],a:["gaziantep","antep","turkey","turkiye","turquia","غازي عنتاب","عنتاب","تركيا"]},
+  amman:{n:{en:"Amman",es:"Amán",ar:"عمّان"},c:{en:"Jordan",es:"Jordania",ar:"الأردن"},sos:"911",ll:[31.95,35.93],a:["amman","aman","jordan","jordania","عمان","الاردن"]}
+};
+const POPULAR={es:["longbeach","losangeles","tijuana","cdmx","madrid"],ar:["gaziantep","amman","berlin","madrid"],en:["longbeach","losangeles","tijuana","berlin","amman"]};
+const PLACES=[]; /* listings come only from the Google Sheet */
+
+/* v3 copy additions */
+const T2={
+ en:{searchFail:"Couldn’t reach city search. Check your connection, or pick a city below.",searching:"Searching cities…",worldwide:"Cities worldwide",nearbyH:"More places nearby",nearbyNote:"Found online. Not yet confirmed by phone, so call before you go.",unchecked:"Not yet checked",directions:"Directions",site:"Website",km:d=>`${d} km away`,loading:"Finding places…",liveOff:"Live search for every city turns on when the site is hosted at aidoasis.org. Showing sample places here.",sosGeneric:"Emergency? Call your local emergency number.",nothingNear:"We couldn’t find places for this need nearby yet.",about:"About",orgs:"For organizations",langLabel:"Language",
+  story:["More than 100 million people have been forced from their homes.","Help exists. A clinic. A shelter. A lawyer who works for free.","But it’s scattered, hard to find and often out of date.","AidOasis puts checked help in one place, in your language."],
+  storyCta:"Find help near you", skip:"Skip to find help",
+  ecoH:"How AidOasis connects", services:"Services", seekers:"People seeking help",
+  needsDiag:["Housing","Quality jobs","Medical support","Education","Food & nutrition","Legal aid","Community"],
+  groups:["Refugees","Stateless people","Internally displaced","Asylum seekers","Returnees"]},
+ es:{searchFail:"No pudimos conectar con la búsqueda de ciudades. Revisa tu conexión o elige una ciudad abajo.",searching:"Buscando ciudades…",worldwide:"Ciudades del mundo",nearbyH:"Más lugares cerca",nearbyNote:"Encontrados en internet. Aún no confirmados por teléfono: llama antes de ir.",unchecked:"Sin revisar",directions:"Cómo llegar",site:"Sitio web",km:d=>`a ${d} km`,loading:"Buscando lugares…",liveOff:"La búsqueda en vivo para cualquier ciudad se activa cuando el sitio está publicado en aidoasis.org. Aquí se muestran lugares de ejemplo.",sosGeneric:"¿Emergencia? Llama al número de emergencias local.",nothingNear:"Aún no encontramos lugares para esto cerca.",about:"Nosotros",orgs:"Para organizaciones",langLabel:"Idioma",
+  story:["Más de 100 millones de personas han tenido que dejar sus hogares.","La ayuda existe. Una clínica. Un albergue. Un abogado que trabaja gratis.","Pero está dispersa, es difícil de encontrar y muchas veces está desactualizada.","AidOasis reúne ayuda revisada en un solo lugar, en tu idioma."],
+  storyCta:"Encuentra ayuda cerca de ti", skip:"Saltar a buscar ayuda",
+  ecoH:"Cómo conecta AidOasis", services:"Servicios", seekers:"Personas que buscan ayuda",
+  needsDiag:["Vivienda","Empleo digno","Atención médica","Educación","Alimentación","Ayuda legal","Comunidad"],
+  groups:["Refugiados","Personas apátridas","Desplazados internos","Solicitantes de asilo","Retornados"]},
+ ar:{searchFail:"تعذّر الوصول إلى البحث عن المدن. تحقق من الاتصال أو اختر مدينة من الأسفل.",searching:"جارٍ البحث عن المدن…",worldwide:"مدن حول العالم",nearbyH:"أماكن أخرى قريبة",nearbyNote:"وجدناها على الإنترنت. لم يتم التأكد منها هاتفياً بعد، لذا اتصل قبل الذهاب.",unchecked:"لم يتم التحقق",directions:"الاتجاهات",site:"الموقع",km:d=>`على بعد ${d} كم`,loading:"جارٍ العثور على الأماكن…",liveOff:"يعمل البحث المباشر لكل المدن عند نشر الموقع على aidoasis.org. نعرض هنا أماكن للتوضيح.",sosGeneric:"حالة طوارئ؟ اتصل برقم الطوارئ المحلي.",nothingNear:"لم نجد أماكن لهذا الطلب بالقرب بعد.",about:"من نحن",orgs:"للمنظمات",langLabel:"اللغة",
+  story:["أُجبر أكثر من 100 مليون شخص على ترك منازلهم.","المساعدة موجودة. عيادة. مأوى. محامٍ يعمل مجاناً.","لكنها متفرقة ويصعب العثور عليها وغالباً ما تكون قديمة.","تجمع AidOasis المساعدة الموثّقة في مكان واحد، بلغتك."],
+  storyCta:"اعثر على مساعدة بالقرب منك", skip:"انتقل إلى البحث عن مساعدة",
+  ecoH:"كيف تربط AidOasis", services:"الخدمات", seekers:"الباحثون عن المساعدة",
+  needsDiag:["السكن","عمل لائق","رعاية طبية","التعليم","الغذاء والتغذية","مساعدة قانونية","المجتمع"],
+  groups:["اللاجئون","عديمو الجنسية","النازحون داخلياً","طالبو اللجوء","العائدون"]}
+};
+for(const k in T2) Object.assign(T[k],T2[k]);
+/* Designer notes for the montage: swap each gradient for a consented, co-designed photo (compressed, <60 KB) */
+const BEAT_NOTES=["Image: a road out of a city","Image: hands at a clinic intake desk","Image: a phone full of conflicting forwards","Image: a co-designer using AidOasis"];
+const DIAG_ICONS=["housing","work","health","school","food","legal","community"];
+
+
+/* ═══ LIVE DATA LAYER ═══════════════════════════════════════════════
+   Works on the real host (aidoasis.org). Inside the claude.ai preview,
+   outside requests are blocked, so the page falls back to sample places.
+   ─ City search, any city on earth: Photon (OpenStreetMap geocoder)
+   ─ Nearby places, any city: OpenStreetMap Overpass API (labelled "not yet checked")
+   ─ Checked places: your Google Sheet (LISTINGS tab, published as CSV)
+   ─ Anonymous search counts + organization sign-ups: Google Apps Script
+   For production traffic, self-host Photon/Overpass or use a paid provider. */
+const CONFIG={
+  GEOCODER:"https://photon.komoot.io",
+  OVERPASS:"https://overpass-api.de/api/interpreter",
+  OVERPASS_MIRRORS:["https://overpass.kumi.systems/api/interpreter","https://overpass.private.coffee/api/interpreter"],
+  NOMINATIM:"https://nominatim.openstreetmap.org",
+  SHEET_CSV_URL:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRt4_gDkFekDpjUqnE8GW-d5HXGBhASsvFvGW85pnEjdoVO8sNAWz7pWaz98qVA-4opX7wCcZbzSLKO/pub?gid=0&single=true&output=csv",
+  LOG_URL:"https://script.google.com/macros/s/AKfycbyzMDDTGhSqNnutXlAfAzjX-vCvl1gAEXx5Nryrc8bGqbXv_t_iEWmnFvspj1SKZrA/exec",
+  ORG_URL:"https://script.google.com/macros/s/AKfycbyzMDDTGhSqNnutXlAfAzjX-vCvl1gAEXx5Nryrc8bGqbXv_t_iEWmnFvspj1SKZrA/exec",
+  RADIUS_KM:12, MAX_NEARBY:12, VERIFIED_RADIUS_KM:40
+};
+const SOS={US:"911",CA:"911",MX:"911",PR:"911",JO:"911",GB:"999",AU:"000",NZ:"111"};
+["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","NO","CH","IS","TR"].forEach(c=>SOS[c]="112");
+let LIVE=null;
+async function fetchRaw(url,opts={},ms=9000){
+  const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),ms);
+  try{const r=await fetch(url,{...opts,signal:ctl.signal});if(!r.ok)throw new Error(String(r.status));LIVE=true;return r;}
+  catch(e){if(LIVE===null)LIVE=false;throw e;}finally{clearTimeout(tm);}
+}
+const fetchJSON=async(u,o,ms)=>(await fetchRaw(u,o,ms)).json();
+const km=(a,b)=>{const t=x=>x*Math.PI/180,dLa=t(b[0]-a[0]),dLo=t(b[1]-a[1]);const h=Math.sin(dLa/2)**2+Math.cos(t(a[0]))*Math.cos(t(b[0]))*Math.sin(dLo/2)**2;return 12742*Math.asin(Math.sqrt(h));};
+/* any-city keys are hash-safe: c<lat×100>e<lon×100>, "n" = minus */
+const enc=v=>(v<0?"n":"")+Math.round(Math.abs(v)*100);
+const dec=s=>(s[0]==="n"?-1:1)*parseInt(s.replace("n",""),10)/100;
+const geoKey=(lat,lon)=>`c${enc(lat)}e${enc(lon)}`;
+function geoStore(){try{return JSON.parse(sessionStorage.getItem("ao-geo")||"{}");}catch(e){return {};}}
+function geoSave(k,v){const m=geoStore();m[k]=v;try{sessionStorage.setItem("ao-geo",JSON.stringify(m));}catch(e){}}
+function addGeoCity(k,{name,country,cc,lat,lon}){
+  CITIES[k]={n:{en:name,es:name,ar:name},c:{en:country||"",es:country||"",ar:country||""},sos:SOS[cc]||"",ll:[lat,lon],a:[],cc,dyn:true};
+}
+function resolveCity(k){
+  if(!k)return false; if(CITIES[k])return true;
+  const m=/^c(n?\d+)e(n?\d+)$/.exec(k); if(!m)return false;
+  const lat=dec(m[1]),lon=dec(m[2]),st=geoStore()[k];
+  addGeoCity(k,st||{name:`${lat.toFixed(2)}, ${lon.toFixed(2)}`,country:"",cc:"",lat,lon});
+  if(!st) reverseName(k,lat,lon);
+  return true;
+}
+async function reverseName(k,lat,lon){
+  try{
+    const j=await fetchJSON(`${CONFIG.GEOCODER}/reverse?lat=${lat}&lon=${lon}&limit=1`);
+    const p=j.features&&j.features[0]&&j.features[0].properties; if(!p)return;
+    const v={name:p.city||p.name||p.county||"",country:p.country||"",cc:(p.countrycode||"").toUpperCase(),lat,lon};
+    if(v.name){addGeoCity(k,v);geoSave(k,v);if(S.city===k){mounted=null;render();}}
+  }catch(e){}
+}
+let GEO_SOURCE="";
+async function geocodePhoton(q){
+  const lang=["en","de","fr","it"].includes(S.lang)?S.lang:"default";
+  const j=await fetchJSON(`${CONFIG.GEOCODER}/api/?q=${encodeURIComponent(q)}&limit=8&lang=${lang}&osm_tag=place`);
+  const out=[];
+  for(const f of (j.features||[])){
+    const p=f.properties||{},c=f.geometry&&f.geometry.coordinates; if(!c||!p.name)continue;
+    if(["country","state","continent","region","province","county"].includes(p.osm_value))continue;
+    out.push({name:p.name,state:p.state||"",country:p.country||"",cc:(p.countrycode||"").toUpperCase(),lat:c[1],lon:c[0]});
+  }
+  return out;
+}
+async function geocodeNominatim(q){
+  const j=await fetchJSON(`${CONFIG.NOMINATIM}/search?format=jsonv2&addressdetails=1&limit=8&accept-language=${S.lang}&q=${encodeURIComponent(q)}`);
+  return (j||[]).filter(a=>["city","town","village","suburb","hamlet","municipality","administrative"].includes(a.addresstype||a.type)).map(a=>{
+    const ad=a.address||{};
+    return {name:a.name||ad.city||ad.town||ad.village||q,state:ad.state||"",country:ad.country||"",cc:(ad.country_code||"").toUpperCase(),lat:parseFloat(a.lat),lon:parseFloat(a.lon)};
+  });
+}
+async function geocode(q){
+  let out=[],err=null;
+  try{out=await geocodePhoton(q);GEO_SOURCE="Photon";}catch(e){err=e;}
+  if(!out.length){try{out=await geocodeNominatim(q);GEO_SOURCE="Nominatim";err=null;}catch(e){err=err||e;}}
+  if(!out.length&&err)throw err;
+  const seen=new Set();
+  return out.filter(x=>{const id=`${x.name}|${x.state}|${x.country}`;if(seen.has(id))return false;seen.add(id);return true;}).slice(0,6);
+}
+function parseCSV(s){
+  const out=[];let row=[],cur="",q=false;
+  for(let i=0;i<s.length;i++){const ch=s[i];
+    if(q){if(ch==='"'&&s[i+1]==='"'){cur+='"';i++;}else if(ch==='"')q=false;else cur+=ch;}
+    else if(ch==='"')q=true;else if(ch===','){row.push(cur);cur="";}
+    else if(ch==='\n'){row.push(cur);out.push(row);row=[];cur="";}else if(ch!=='\r')cur+=ch;}
+  if(cur||row.length){row.push(cur);out.push(row);} return out;
+}
+/* Listings source: live from the Apps Script (no publish delay, only approved/verified rows),
+   falling back to the "Publish to web" CSV. */
+let SHEET_SOURCE="";
+async function sheetText(){
+  if(CONFIG.LOG_URL){
+    try{ const t=await (await fetchRaw(CONFIG.LOG_URL+"?view=listings&t="+Date.now(),{cache:"no-store"},10000)).text();
+      if(/^\ufeff?status,/i.test(t.trim())){ SHEET_SOURCE="live (Apps Script)"; return t; } }catch(e){}
+  }
+  let t; try{ t=await (await fetchRaw(CONFIG.SHEET_CSV_URL,{cache:"no-store"},12000)).text(); }
+  catch(e){ t=await (await fetchRaw(CONFIG.SHEET_CSV_URL,{},12000)).text(); }
+  SHEET_SOURCE="published CSV (can lag behind edits)"; return t;
+}
+/* Website text lives in the Sheet's TEXT tab (key, en, es, ar). Blank cells keep the built-in wording. */
+function applyText(csv){
+  const rows=parseCSV(csv), h=(rows.shift()||[]).map(x=>x.replace(/^\ufeff/,"").trim().toLowerCase()), ki=h.indexOf("key");
+  if(ki<0) return 0; let n=0;
+  for(const r of rows){
+    const key=(r[ki]||"").trim(); if(!key) continue;
+    for(const L of Object.keys(LANGS)){
+      const ci=h.indexOf(L), v=ci>=0?(r[ci]||"").trim():""; if(!v||!T[L]) continue;
+      const parts=key.split("."); let o=T[L];
+      for(let i=0;i<parts.length-1;i++){ const k=/^\d+$/.test(parts[i])?(+parts[i]-1):parts[i]; if(o[k]==null||typeof o[k]!=="object") { o=null; break; } o=o[k]; }
+      if(!o) continue; const last=parts[parts.length-1], lk=/^\d+$/.test(last)?(+last-1):last;
+      if(typeof o[lk]==="function") continue; if(o[lk]!==v){ o[lk]=v; n++; }
+    }
+  }
+  return n;
+}
+function cachedText(){ try{ const c=localStorage.getItem("ao-text"); if(c) applyText(c); }catch(e){} }
+async function refreshText(){
+  if(!CONFIG.LOG_URL) return;
+  try{
+    const t=await (await fetchRaw(CONFIG.LOG_URL+"?view=text&t="+Date.now(),{cache:"no-store"},10000)).text();
+    if(!/^\ufeff?key,/i.test(t.trim())) return;
+    let old=""; try{old=localStorage.getItem("ao-text")||"";}catch(e){}
+    if(t===old) return;
+    try{localStorage.setItem("ao-text",t);}catch(e){}
+    if(applyText(t)>0 && !document.querySelector("#resbox .rc, #q:focus")){ mounted=null; render(); }
+  }catch(e){}
+}
+let VERIFIED=null,FROM_SHEET=false,SHEET_UNCHECKED=[],SHEET_STATE="";
+async function loadVerified(){
+  if(VERIFIED)return VERIFIED;
+  VERIFIED=PLACES.slice();
+  if(!CONFIG.SHEET_CSV_URL)return VERIFIED;
+  try{
+    let txt="";
+    txt=await sheetText();
+    SHEET_STATE="ok";
+    const rows=parseCSV(txt),h=rows.shift().map(x=>x.replace(/^\ufeff/,"").trim().toLowerCase());
+    const g=(r,k)=>(r[h.indexOf(k)]||"").trim(),list=v=>v?v.split("|").map(x=>x.trim()).filter(Boolean):[],yes=v=>/^(true|yes|1|si|sí)$/i.test(v);
+    const got=rows.filter(r=>r.length>3&&g(r,"status").toLowerCase()==="verified").map(r=>({
+      status:"verified",city:g(r,"city_key"),need:g(r,"need"),name:g(r,"name"),area:g(r,"area"),free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),
+      langs:list(g(r,"languages")),phone:g(r,"phone"),wa:g(r,"whatsapp").replace(/\D/g,""),checked:g(r,"checked"),hours:g(r,"hours"),site:/^https?:\/\//.test(g(r,"website"))?g(r,"website"):"",
+      ll:(g(r,"lat")&&g(r,"lon"))?[parseFloat(g(r,"lat")),parseFloat(g(r,"lon"))]:null}));
+    if(got.length){VERIFIED=got;FROM_SHEET=true;}
+    SHEET_UNCHECKED=rows.filter(r=>r.length>3&&g(r,"status").toLowerCase()==="approved"&&g(r,"lat")&&g(r,"lon")).map(r=>({
+      osm:true,fromSheet:true,free:yes(g(r,"free")),nopapers:yes(g(r,"no_papers")),langs:list(g(r,"languages")),wa:g(r,"whatsapp").replace(/\D/g,""),name:g(r,"name"),need:g(r,"need"),area:g(r,"area"),phone:g(r,"phone"),hours:g(r,"hours"),
+      site:/^https?:\/\//.test(g(r,"website"))?g(r,"website"):"",ll:[parseFloat(g(r,"lat")),parseFloat(g(r,"lon"))]}));
+  }catch(e){SHEET_STATE="failed";console.warn("AidOasis: could not load the Google Sheet",e);}
+  return VERIFIED;
+}
+const OSM_Q={
+  legal:['nwr["office"="ngo"]','nwr["social_facility:for"~"refugee|migrant|asylum|displaced"]','nwr["government"~"migration|immigration"]','nwr["office"="lawyer"]["lawyer"~"legal_aid|pro_bono|immigration"]'],
+  housing:['nwr["social_facility"~"shelter|housing|group_home"]','nwr["amenity"="refugee_site"]'],
+  food:['nwr["social_facility"~"food_bank|soup_kitchen"]','nwr["amenity"~"food_bank|food_sharing|social_facility"]["social_facility"~"food"]'],
+  health:['nwr["amenity"~"clinic|doctors"]','nwr["healthcare"="clinic"]'],
+  work:['nwr["office"="employment_agency"]','nwr["amenity"="job_centre"]'],
+  school:['nwr["amenity"~"^(school|language_school)$"]']
+};
+const nearbyCache={};
+async function nearbyOSM(city,need){
+  const ck=`${city.ll}|${need}`; if(nearbyCache[ck])return nearbyCache[ck];
+  const [lat,lon]=city.ll,r=CONFIG.RADIUS_KM*1000;
+  const q=`[out:json][timeout:10];(${OSM_Q[need].map(s=>`${s}(around:${r},${lat},${lon});`).join("")});out center tags 120;`;
+  try{const hit=sessionStorage.getItem("ao-osm:"+ck); if(hit){const v=JSON.parse(hit); nearbyCache[ck]=v; return v;}}catch(e){}
+  const eps=[CONFIG.OVERPASS,...(CONFIG.OVERPASS_MIRRORS||[])];
+  const ask=ep=>fetchJSON(ep,{method:"POST",body:"data="+encodeURIComponent(q),headers:{"Content-Type":"application/x-www-form-urlencoded"}},9000);
+  let j=null;
+  try{ j=await Promise.any(eps.slice(0,2).map(ask)); }          /* first two servers race; fastest wins */
+  catch(e){ if(eps[2]) j=await ask(eps[2]); else throw e; }     /* last resort */
+  const seen=new Set();
+  const out=(j.elements||[]).map(e=>{
+    const tg=e.tags||{},la=e.lat!=null?e.lat:(e.center&&e.center.lat),lo=e.lon!=null?e.lon:(e.center&&e.center.lon);
+    const name=tg["name:"+S.lang]||tg.name; if(!name||la==null)return null;
+    const id=name.toLowerCase(); if(seen.has(id))return null; seen.add(id);
+    const site=tg.website||tg["contact:website"]||"";
+    return {osm:true,name,ll:[la,lo],d:km(city.ll,[la,lo]),
+      area:[tg["addr:street"]?`${tg["addr:street"]} ${tg["addr:housenumber"]||""}`.trim():"",tg["addr:city"]||""].filter(Boolean).join(", "),
+      phone:(tg.phone||tg["contact:phone"]||"").split(";")[0].trim(),site:/^https?:\/\//.test(site)?site:"",hours:tg.opening_hours||""};
+  }).filter(Boolean).sort((a,b)=>a.d-b.d).slice(0,CONFIG.MAX_NEARBY);
+  nearbyCache[ck]=out; try{sessionStorage.setItem("ao-osm:"+ck,JSON.stringify(out));}catch(e){} return out;
+}
+function logSearch(){
+  if(!CONFIG.LOG_URL)return; const c=CITIES[S.city]||{};
+  try{fetch(CONFIG.LOG_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({need:S.need,city:c.dyn?(c.n.en||""):S.city,cc:c.cc||"",lang:S.lang})}).catch(()=>{});}catch(e){}
+}
+
+/* Brand icon set (line, 1.6 stroke) */
+const ICON={
+ legal:'<path d="M12 3v18M6 21h12M5 7h14M5 7l-3 6a3 3 0 006 0L5 7zM19 7l-3 6a3 3 0 006 0l-3-6z"/>',
+ housing:'<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+ food:'<path d="M4 10h16l-1.6 9a2 2 0 01-2 1.6H7.6a2 2 0 01-2-1.6L4 10zM8.5 10L12 4l3.5 6"/>',
+ health:'<path d="M12 20.5S4 16 4 10a4.4 4.4 0 018-2.6A4.4 4.4 0 0120 10c0 6-8 10.5-8 10.5zM12 9v5M9.5 11.5h5"/>',
+ work:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/>',
+ school:'<path d="M2 9l10-5 10 5-10 5L2 9zM6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>',
+ community:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20a6 6 0 0112 0M14.5 20a4.5 4.5 0 016.5-4"/>',
+ search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+ pin:'<path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+ phone:'<path d="M5 4h3.5l2 5-2.4 1.5a11 11 0 005.4 5.4L15 13.5l5 2V19a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',
+ chat:'<path d="M20.5 12a8.5 8.5 0 01-12.4 7.5L3.5 20.5l1-4.4A8.5 8.5 0 1120.5 12z"/>',
+ share:'<path d="M7 17L17 7M9 7h8v8"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+ doc:'<path d="M8 4h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M9 9h6M9 13h6"/>',
+ alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'
+};
+const SHAPES=['<circle cx="9" cy="9" r="6.5"/>','<rect x="17" y="17" width="12" height="12"/>','<path d="M22.5 13.5l7 12.5h-14z"/>','<path d="M3 29V18a6.5 6.5 0 0113 0v11"/>'];
+const ico=(n,cls="bi")=>`<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]||""}</svg>`;
+const tileIcon=(n,i=0)=>`<span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#00B1FF" stroke-opacity=".7" stroke-width="2.6">${SHAPES[i%SHAPES.length]}</g><g transform="translate(4 4)" stroke="currentColor" stroke-width="1.6">${ICON[n]||""}</g></svg></span>`;
+
+/* STATE + ROUTING */
+function storedLang(){try{return localStorage.getItem("ao-lang");}catch(e){return null;}}
+function picked(){try{return sessionStorage.getItem("ao-picked")==="1";}catch(e){return !!S.pickedMem;}}
+function markPicked(){S.pickedMem=true;try{sessionStorage.setItem("ao-picked","1");}catch(e){}}
+function saveLang(l){try{localStorage.setItem("ao-lang",l);}catch(e){}}
+const S={lang:LANGS[storedLang()]?storedLang():null,view:"home",city:null,need:null,q:"",sent:false,scrollTool:false,prev:""};
+const t=()=>T[S.lang||"en"];
+const app=document.getElementById("app");
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f\u064b-\u065f]/g,"").replace(/[أإآ]/g,"ا").trim();
+const pad=n=>String(n).padStart(2,"0");
+let mounted=null; // which page is currently in the DOM
+
+let ROUTE=location.hash.slice(1);
+function readHash(h=ROUTE){
+  S.city=null;S.need=null;S.scrollTool=false;
+  if(h==="status"){S.view="status";return;}
+  if(h==="language"){S.view="lang";return;}
+  const [l0]=h.split("-");
+  if(LANGS[l0]){markPicked();S.lang=l0;saveLang(l0);}
+  if(!S.lang){S.view="lang";S.after=h;return;}
+  if(h==="organizations"){S.view=S.lang?"orgs":"lang";return;}
+  if(h==="about"){S.view=S.lang?"about":"lang";return;}
+  if(h==="find"){S.view=S.lang?"home":"lang";S.scrollTool=true;return;}
+  const [l,c,n]=h.split("-");
+  if(LANGS[l]){
+    S.lang=l;saveLang(l);S.view="home";
+    if(resolveCity(c)){S.city=c;S.scrollTool=true; if(NEEDS.some(x=>x[0]===n)) S.need=n;}
+    return;
+  }
+  S.view=S.lang?"home":"lang";
+}
+/* Routing works even where the page can't change its own address (e.g. some embedded previews) */
+function go(h){
+  if(S.pendingNeed&&/^[a-z]{2}-[a-z0-9]+$/.test(h)&&LANGS[h.split("-")[0]]){h+="-"+S.pendingNeed;S.pendingNeed=null;}
+  ROUTE=h;
+  try{ if(location.hash.slice(1)!==h) location.hash=h; }catch(e){}
+  readHash(h); render();
+}
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h===ROUTE)return;ROUTE=h;readHash(h);render();});
+document.addEventListener("click",e=>{
+  const a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a)return;
+  e.preventDefault(); go(a.getAttribute("href").slice(1));
+});
+const toolHash=()=>[S.lang,S.city,S.need].filter(Boolean).join("-");
+
+/* SHELL */
+const globeSVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>`;
+function shell(){
+  const L=S.lang||"en";
+  document.documentElement.lang=L; document.documentElement.dir=LANGS[L].dir;
+  const x=t();
+  document.getElementById("nav").innerHTML=`<a href="#about" ${S.view==="about"?'aria-current="page"':""}>${x.about}</a>`;
+  const g=document.getElementById("globe");
+  g.innerHTML=`${globeSVG}<span>${LANGS[L].label}</span>`;
+  g.setAttribute("aria-label",x.langLabel);
+  g.onclick=()=>{S.prev=S.view==="home"?toolHash():S.view==="about"?"about":S.view==="orgs"?"organizations":"";go("language");};
+  document.getElementById("foot").innerHTML=`<div>${x.foot.map(v=>`<p>${v}</p>`).join("")}<p>© 2026 AidOasis · Map data © OpenStreetMap contributors</p></div>
+    <nav><a href="#find">${x.nav[0]}</a><a href="#organizations">${x.orgs}</a><a href="#about">${x.about}</a></nav>`;
+}
+function headerState(){
+  const st=document.getElementById("story");
+  const hh=document.querySelector("header").offsetHeight;
+  const over=S.view==="home"&&st&&st.getBoundingClientRect().bottom>hh+1;
+  document.body.classList.toggle("overlay",!!over);
+}
+let headerBound=false;
+function bindHeader(){ if(headerBound) return; headerBound=true; let tk=false;
+  addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;headerState();});}},{passive:true});
+  addEventListener("resize",headerState);
+}
+function render(){
+  document.documentElement.classList.remove("ab-snapping");
+  shell(); bindHeader();
+  document.body.classList.toggle("langmode",S.view==="lang");
+  if(S.view==="home"&&mounted==="home"){ renderTool(true); headerState(); return; }
+  ({lang:vLang,home:vHome,orgs:vOrgs,about:vAbout,status:vStatus})[S.view]();
+  mounted=S.view;
+  if(S.view==="home"&&S.scrollTool) requestAnimationFrame(()=>{document.getElementById("tool").scrollIntoView();headerState();});
+  else window.scrollTo(0,0);
+  headerState();
+}
+
+/* building blocks */
+const arr=`<span class="arr" aria-hidden="true">→</span>`;
+const sec=(label,num,inner,id="")=>`<section ${id?`id="${id}"`:""}><div class="sec-lab"><h2>${label}</h2><span>[${pad(num)}]</span></div>${inner}</section>`;
+const rows=items=>`<ol class="rows">${items.map((v,i)=>{
+  const [b,d]=Array.isArray(v)?v:[v,""];
+  return `<li><span class="n">${pad(i+1)}</span><div><b>${b}</b>${d?`<span class="d">${d}</span>`:""}</div></li>`;}).join("")}</ol>`;
+const eyebrow=()=>`<p class="eyebrow"><span>${t().chips.join(" · ")}</span></p>`;
+const trustChips=()=>`<ul class="trust">${t().chips.map(c=>`<li>${ico("check")} ${c}</li>`).join("")}</ul>`;
+const hero=(h,p,inner)=>`<div class="hero">${eyebrow()}<h1>${h}</h1><p class="lede">${p}</p>${inner}</div>`;
+
+/* 1 · LANGUAGE */
+function vLang(){
+  app.innerHTML=`<div class="langscreen">
+    <h1>Elige tu idioma<span>Choose your language</span><span dir="rtl">اختر لغتك</span></h1>
+    <div class="langlist">${Object.entries(LANGS).map(([k,v])=>`<button type="button" data-l="${k}" dir="${v.dir}" class="${k===S.lang?"cur":""}"><span>${v.name}</span><span aria-hidden="true">${v.dir==="rtl"?"←":"→"}</span></button>`).join("")}</div>
+  </div>`;
+  app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{
+    S.lang=b.dataset.l; saveLang(S.lang); markPicked();
+    let p=S.prev||S.after||""; S.prev=""; S.after="";
+    if(p&&p.includes("-")) p=[S.lang,...p.split("-").slice(1)].join("-");
+    else if(p&&LANGS[p]) p=S.lang;
+    mounted=null; go(p||"");
+  });
+}
+
+/* 2 + 3 · HOME = story montage → tool → promise */
+const COVER=[["Long Beach",33.770,-118.193,"longbeach"],["Los Angeles",34.052,-118.244,"losangeles"],["Santa Ana",33.745,-117.868],["Garden Grove",33.774,-117.938],["Anaheim",33.835,-117.915]];
+function vHome(){
+  const x=t();
+  const needTiles=NEEDS.map(([k,ic,l],j)=>`<button class="tile" type="button" data-browse="${k}">${tileIcon(k,j)}${l[S.lang]}</button>`).join("");
+  const cover=COVER.map((c,i)=>`<button class="chip cover" type="button" data-cover="${i}">${esc(c[0])}<small id="cov${i}"></small></button>`).join("");
+  const faq=x.faq.map(([q,a])=>`<details class="faq"><summary>${q}</summary><p>${a}</p></details>`).join("");
+  app.innerHTML=`
+    <section class="stage${(S.city||reduceMotion())?" static":""}" id="stage" aria-label="${x.heroH}">
+      <div class="stage-pin">
+        <div class="stage-copy" id="stageCopy"><h1>${x.heroH.replace(/([.。]) /,"$1<br>")}</h1><p class="lede">${x.heroP}</p></div>
+        <div class="stage-meta" id="stageMeta">${trustChips()}<hr class="hero-rule"></div>
+        <button class="stage-hint" type="button" id="stageHint"><span class="hint-txt">${x.stageHint}</span><span class="hint-arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="stage-card" id="tool"><ol class="stepper" id="stepper"></ol></div>
+      </div>
+    </section>
+    ${sec(x.trustH,1,`<div class="split2"><div>${rows(x.promise)}</div><aside class="sources"><h3>${x.sourcesH}</h3><p>${x.sourcesP}</p></aside></div>`)}
+    ${sec(x.faqH,2,`<div class="faqs">${faq}</div>`)}`;
+  renderTool(false);
+  bindStage();
+  app.querySelectorAll("[data-browse]").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.browse;
+    if(S.city){go(`${S.lang}-${S.city}-${k}`);return;}
+    S.pendingNeed=k; toast(x.pickCityFirst);
+    const st=stageP();
+    if(st){const hh=document.querySelector("header").offsetHeight;scrollTo({top:scrollY+st.sg.getBoundingClientRect().top-hh+(st.sg.offsetHeight-st.pin.offsetHeight),behavior:"smooth"});}
+    else document.getElementById("tool").scrollIntoView({behavior:"smooth"});
+    setTimeout(()=>{const q=document.getElementById("q");if(q)q.focus({preventScroll:true});},700);
+  });
+  app.querySelectorAll("[data-cover]").forEach(b=>b.onclick=()=>{
+    const c=COVER[+b.dataset.cover];
+    if(c[3]){go(`${S.lang}-${c[3]}`);return;}
+    const k=geoKey(c[1],c[2]),v={name:c[0],country:"United States",cc:"US",lat:c[1],lon:c[2]};
+    addGeoCity(k,v);geoSave(k,v);go(`${S.lang}-${k}`);
+  });
+  loadVerified().then(()=>{
+    const all=[...(FROM_SHEET?VERIFIED:[]),...SHEET_UNCHECKED].filter(p=>p.ll);
+    COVER.forEach((c,i)=>{const n=all.filter(p=>km(p.ll,[c[1],c[2]])<25).length,el=document.getElementById("cov"+i);if(el&&n)el.textContent=n===1?x.placeOne:`${n} ${x.placesN}`;});
+  }).catch(()=>{});
+}
+
+/* intro stage: big words first, then the tool rises to the center */
+let stageBound=false;
+function stageP(){
+  const sg=document.getElementById("stage"); if(!sg||sg.classList.contains("static")) return null;
+  const hh=document.querySelector("header").offsetHeight,r=sg.getBoundingClientRect(),pin=sg.querySelector(".stage-pin");
+  const span=Math.max(1,r.height-pin.offsetHeight);
+  return {sg,pin,p:Math.min(1,Math.max(0,(hh-r.top)/span))};
+}
+function stageReset(){
+  const c=document.getElementById("stageCopy"),k=document.getElementById("tool");
+  if(c){c.style.opacity="";c.style.transform="";c.style.pointerEvents="";c.style.top="";c.style.bottom="";}
+  const hn=document.getElementById("stageHint"); if(hn){hn.style.top="";hn.style.bottom="";hn.style.opacity="";}
+  const mt=document.getElementById("stageMeta"); if(mt){mt.style.top="";mt.style.opacity="";mt.style.transform="";mt.style.pointerEvents="";}
+  if(k){k.style.transform="";k.style.opacity="";}
+}
+function stageFrame(){
+  const st=stageP(); if(!st) return;
+  const e=st.p*st.p*(3-2*st.p), h=st.pin.offsetHeight;
+  const c=document.getElementById("stageCopy"),k=document.getElementById("tool");
+  const o=Math.max(0,1-e*1.6);
+  c.style.opacity=o.toFixed(3); c.style.transform=`translateY(${(-e*56).toFixed(1)}px) scale(${(1-e*.04).toFixed(3)})`;
+  c.style.pointerEvents=o<.4?"none":"";
+  /* headline + hint + peeking tool form one group, balanced vertically on any screen */
+  const hint0=document.getElementById("stageHint"), hintH=hint0?hint0.offsetHeight:36, gap=Math.min(28,Math.max(14,h*.025));
+  /* the tool always peeks from the bottom edge; the words sit in the space above, clearly separated */
+  /* tool peeks from the bottom; promises + rule sit just above it; the words are centered between header and that line */
+  const mEl=document.getElementById("stageMeta"), copyH=c.offsetHeight, metaH=mEl?mEl.offsetHeight:0;
+  let peek=Math.min(170,Math.max(110,h*.16)), mgap=Math.min(36,Math.max(18,h*.03)), minAir=Math.max(24,h*.04);
+  if(copyH+minAir*2+metaH+mgap+hintH+gap+peek>h){ peek=96; mgap=16; minAir=16; }
+  const cardTop=h-peek, hintTop=cardTop-gap-hintH, metaTop=hintTop-mgap-metaH;
+  const top0=Math.max(minAir,(metaTop-copyH)/2);
+  c.style.top=top0+"px"; c.style.bottom="auto";
+  if(mEl){ mEl.style.top=metaTop+"px"; mEl.style.opacity=c.style.opacity; mEl.style.transform=`translateY(${(-e*40).toFixed(1)}px)`; mEl.style.pointerEvents=c.style.pointerEvents; }
+  const y=(1-e)*(cardTop+k.offsetHeight*.4-h*.5);
+  k.style.transform=`translate(-50%,calc(-50% + ${y.toFixed(1)}px)) scale(${(.8+.2*e).toFixed(3)})`;
+  k.style.opacity=(.7+.3*e).toFixed(3);
+  const hint=document.getElementById("stageHint"); if(hint){const ho=Math.max(0,1-e*3);hint.style.opacity=ho.toFixed(3);hint.style.top=hintTop+"px";hint.style.bottom="auto";hint.style.pointerEvents=ho<.3?"none":"";}
+  st.sg.classList.toggle("arrived",st.p>.98);
+}
+function stageArrive(focus){
+  const st=stageP(); if(!st||st.p>.95){ if(focus){const q=document.getElementById("q");if(q)q.focus({preventScroll:true});} return; }
+  const hh=document.querySelector("header").offsetHeight;
+  scrollTo({top:scrollY+st.sg.getBoundingClientRect().top-hh+(st.sg.offsetHeight-st.pin.offsetHeight),behavior:reduceMotion()?"auto":"smooth"});
+  if(focus) setTimeout(()=>{const q=document.getElementById("q");if(q)q.focus({preventScroll:true});},650);
+}
+function bindStage(){
+  const hint=document.getElementById("stageHint"); if(hint) hint.onclick=()=>stageArrive(true);
+  const card=document.getElementById("tool");
+  if(card) card.addEventListener("click",ev=>{ const st=stageP(); if(!st||st.p>.95) return;
+    if(ev.target.closest("button,a,input")) return;   /* chips and links work as usual */
+    stageArrive(true); });
+  const sg=document.getElementById("stage"); if(!sg) return;
+  if(!stageBound){stageBound=true;let tk=false;
+    addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;stageFrame();});}},{passive:true});
+    addEventListener("resize",stageFrame);
+    /* tapping the search before the tool has arrived brings it to center */
+    document.addEventListener("focusin",ev=>{ if(ev.target&&ev.target.id==="q") stageArrive(false); });
+  }
+  stageFrame();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(stageFrame);
+}
+
+let motionBound=false;
+function storyMotion(){
+  const hint=document.getElementById("hint");
+  if(hint){hint.style.cursor="pointer";hint.onclick=()=>document.getElementById("tool").scrollIntoView({behavior:"smooth"});}
+  if(!motionBound){ motionBound=true; let tk=false;
+    addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;storyFrame();});}},{passive:true});
+    addEventListener("resize",storyFrame);
+  }
+  storyFrame();
+}
+function storyFrame(){
+  const st=document.getElementById("story"); if(!st) return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const r=st.getBoundingClientRect(), span=Math.max(1,r.height-innerHeight);
+  const p=Math.min(1,Math.max(0,-r.top/span));
+  const lines=[...st.querySelectorAll(".lines p")], n=lines.length;
+  const photo=st.querySelector(".photo"), dim=st.querySelector(".dim");
+  if(!reduce) photo.style.transform=`translateY(${(-p*6).toFixed(2)}%) scale(${(1.14-p*0.09).toFixed(3)})`;
+  dim.style.opacity=(Math.max(0,(p-.55)/.45)*.35).toFixed(3);
+  let cur=0;
+  lines.forEach((el,i)=>{
+    const local=p*n-i; // 0..1 inside its segment
+    let o;
+    if(local<0) o=0;
+    else if(local<.22) o=local/.22;
+    else if(local<.78||i===n-1) o=1;
+    else if(local<1) o=1-(local-.78)/.22;
+    else o=0;
+    if(local>=0&&local<1) cur=i;
+    if(i===n-1&&local>=1){o=1;cur=i;}
+    el.style.opacity=o.toFixed(3);
+    el.style.transform=reduce?"none":`translateY(${((.5-Math.min(1,Math.max(0,local)))*44).toFixed(1)}px)`;
+  });
+  document.getElementById("beatNo").textContent=`${pad(cur+1)} / ${pad(n)}`;
+  document.getElementById("bar").style.transform=`scaleX(${p.toFixed(3)})`;
+  const end=p>.86;
+  document.getElementById("cta").classList.toggle("on",end);
+  document.getElementById("hint").style.visibility=end?"hidden":"visible";
+}
+
+/* tool stepper */
+/* Focus rule: if the card fits on screen, center it; if it's taller (results), line its top up under the header.
+   One gentle glide per step, never mid-typing. */
+let focusTimer=null;
+function focusCard(smooth){ clearTimeout(focusTimer); focusTimer=setTimeout(()=>doFocusCard(smooth),90); }
+function doFocusCard(smooth){
+  const k=document.getElementById("tool"); if(!k) return;
+  const sg=document.getElementById("stage"); if(sg&&!sg.classList.contains("static")) return;
+  const hh=document.querySelector("header").offsetHeight, r=k.getBoundingClientRect(), avail=innerHeight-hh;
+  const target=r.height<=avail-48 ? hh+(avail-r.height)/2 : hh+16;
+  const dy=r.top-target; if(Math.abs(dy)<4) return;
+  scrollTo({top:scrollY+dy,behavior:(smooth&&!reduceMotion())?"smooth":"auto"});
+}
+function renderTool(scroll){
+  const x=t(), el=document.getElementById("stepper"); if(!el) return;
+  if(S.city){const sg=document.getElementById("stage");
+    if(sg&&!sg.classList.contains("static")){const k=document.getElementById("tool"),before=k.getBoundingClientRect().top;
+      sg.classList.add("static");stageReset();
+      /* keep the focus on the tool: push the hero fully above the screen instead of letting it reappear */
+      const hh=document.querySelector("header").offsetHeight;
+      k.style.marginTop=Math.max(24,before-hh+32,innerHeight*.55+32)+"px";
+      const after=k.getBoundingClientRect().top;
+      if(Math.abs(after-before)>1) scrollTo({top:scrollY+(after-before),behavior:"instant"});}}
+  const st=i=>i===0?(S.city?"done":"active"):i===1?(S.need?"done":S.city?"active":"todo"):(S.need?"active":"todo");
+  const c=S.city&&CITIES[S.city], n=S.need&&NEEDS.find(v=>v[0]===S.need);
+  const head=(i,editLabel,editId)=>`<div class="st-head"><span class="n"><span>${i+1}</span></span><h3>${x.how[i]}</h3>${editLabel?`<button class="edit" type="button" id="${editId}">${editLabel}</button>`:""}</div>`;
+  const body=[
+    st(0)==="active"?picker():"",
+    st(1)==="active"?`<div class="grid">${NEEDS.map(([k,ic,l],j)=>`<button class="tile" type="button" data-n="${k}">${tileIcon(k,j)}${l[S.lang]}</button>`).join("")}</div>`:"",
+    st(2)==="active"?'<div id="resbox"></div>':""
+  ];
+  el.innerHTML=[0,1,2].map(i=>`
+    <li class="step ${st(i)}" id="step${i}">
+      ${head(i, i===0&&c?`${ico("pin")} ${esc(c.n[S.lang])}`: i===1&&n?`${ico(n[0])} ${n[2][S.lang]}`:"", i===0?"e0":"e1")}
+      ${body[i]?`<div class="st-body">${body[i]}</div>`:""}
+    </li>`).join("");
+  if(st(0)==="active") bindPicker();
+  const e0=document.getElementById("e0"); if(e0) e0.onclick=()=>go(S.lang);
+  const e1=document.getElementById("e1"); if(e1) e1.onclick=()=>go(`${S.lang}-${S.city}`);
+  el.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>go(`${S.lang}-${S.city}-${b.dataset.n}`));
+  if(st(2)==="active") fillResults();
+  if(scroll) focusCard(true);
+}
+
+/* city picker */
+function picker(){
+  return `<div class="picker">
+    <div class="search">${ico("search")}
+      <input id="q" type="search" autocomplete="off" placeholder="${t().search}" aria-label="${t().where}" value="${esc(S.q)}">
+    </div>
+    <div id="hits"></div>
+    <button class="linkbtn" type="button" id="loc">${ico("pin")} ${t().locate}</button>
+    <p class="muted" id="locMsg" hidden></p></div>`;
+}
+function bindPicker(){
+  const q=document.getElementById("q"),hits=document.getElementById("hits");
+  const chip=k=>`<button class="chip" type="button" data-c="${k}">${esc(CITIES[k].n[S.lang])}</button>`;
+  const gchip=(g,i)=>`<button class="chip" type="button" data-g="${i}">${esc(g.name)}<small>${esc([g.state,g.country].filter(Boolean).join(", "))}</small></button>`;
+  let geo=[],pending=false,failed=false,timer=null,seq=0;
+  const bind=()=>{
+    hits.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{S.q="";go(`${S.lang}-${b.dataset.c}`);});
+    hits.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{
+      const g=geo[+b.dataset.g],k=geoKey(g.lat,g.lon),v={name:g.name,country:g.country,cc:g.cc,lat:g.lat,lon:g.lon};
+      addGeoCity(k,v);geoSave(k,v);S.q="";go(`${S.lang}-${k}`);});
+  };
+  const draw=()=>{
+    S.q=q.value;const v=norm(q.value);
+    if(!v){hits.innerHTML=`<div class="chips" aria-label="${t().popular}">${POPULAR[S.lang].map(chip).join("")}</div>`;bind();return;}
+    const m=Object.keys(CITIES).filter(k=>{const c=CITIES[k];if(c.dyn)return false;return [...c.a,...Object.values(c.n),...Object.values(c.c)].some(a=>norm(a).includes(v));});
+    const loc=m.length?`<div class="chips">${m.map(chip).join("")}</div>`:"";
+    const gl=geo.length?`<p class="geo-l">${t().worldwide}</p><div class="chips">${geo.map(gchip).join("")}</div>`:"";
+    const msg=(!m.length&&!geo.length)?`<p class="muted">${pending?t().searching:failed?t().searchFail:t().noMatch}</p>`:"";
+    hits.innerHTML=loc+gl+msg;bind();
+  };
+  const run=(delay)=>{
+    geo=[];failed=false;clearTimeout(timer);const v=q.value.trim();
+    if(v.length>=2){pending=true;const my=++seq;
+      timer=setTimeout(async()=>{try{const r=await geocode(v);if(my===seq)geo=r;}catch(e){if(my===seq)failed=true;}if(my===seq){pending=false;draw();}},delay);}
+    else pending=false;
+    draw();
+  };
+  q.oninput=()=>run(400);
+  q.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();run(0);}};
+  draw();
+  document.getElementById("loc").onclick=()=>{
+    const msg=document.getElementById("locMsg");msg.hidden=false;msg.textContent=t().locating;
+    if(!navigator.geolocation){msg.textContent=t().nearNone;return;}
+    navigator.geolocation.getCurrentPosition(p=>{
+      const a=p.coords.latitude,b=p.coords.longitude;let best=null,d=1e9;
+      for(const [k,c] of Object.entries(CITIES)){if(c.dyn)continue;const dd=km(c.ll,[a,b]);if(dd<d){d=dd;best=k;}}
+      if(best&&d<60){go(`${S.lang}-${best}`);return;}
+      const k=geoKey(a,b);resolveCity(k);go(`${S.lang}-${k}`);
+    },()=>{msg.textContent=t().nearNone;},{maximumAge:600000,timeout:8000});
+  };
+}
+
+function month(ym){const [y,m]=(ym||"").split("-").map(Number);if(!y||!m)return "";return new Date(y,m-1,1).toLocaleDateString(S.lang==="en"?"en-US":S.lang,{month:"short",year:"numeric"});}
+const dirURL=ll=>`https://www.google.com/maps/dir/?api=1&destination=${ll[0]},${ll[1]}`;
+/* ── Result cards: A (best match), B (checked), D (not yet checked) ── */
+function langName(code){
+  if(LANG_NAMES[code]) return LANG_NAMES[code][S.lang];
+  try{ const n=new Intl.DisplayNames([S.lang],{type:"language"}).of(code); if(n&&n!==code) return n.charAt(0).toLocaleUpperCase(S.lang)+n.slice(1); }catch(e){}
+  return code;
+}
+function prettyPhone(ph){
+  const d=(ph||"").replace(/[^\d+]/g,""); const m=d.match(/^\+?1?(\d{3})(\d{3})(\d{4})$/);
+  return m?`(${m[1]}) ${m[2]}-${m[3]}`:(ph||"");
+}
+let RESULTS=[];
+function shareText(p){ const c=CITIES[S.city]; return [p.name, [prettyPhone(p.phone),p.area].filter(Boolean).join(" · ")].filter(Boolean).join("\n"); }
+function shareURL(){ return location.href.split("#")[0]+"#"+[S.lang,S.city,S.need].filter(Boolean).join("-"); }
+function resultCard(p,x,i,best){
+  const verified=p.status==="verified";
+  const dist=p.d!=null?x.km(p.d<1?p.d.toFixed(1):Math.round(p.d)):"";
+  const meta=[p.area,dist,p.hours].filter(Boolean).map(esc).join(" · ");
+  const langs=(p.langs||[]).slice(0,3).map(l=>esc(langName(l)));
+  const chips=[p.free?x.free:"",p.nopapers?x.nopapers:"",...langs].filter(Boolean);
+  const top=verified
+    ?`${best?`<span class="rc-badge rc-best">${x.bestMatch}</span>`:""}<span class="rc-badge rc-ok">${ico("check")} ${p.checked?x.checked(month(p.checked)).replace(/^✓\s*/,""):x.checkedPlain.replace(/^✓\s*/,"")}</span>`
+    :`<span class="rc-badge rc-warn">${ico("alert")} ${x.unchecked}</span>`;
+  const tel=(p.phone||"").replace(/[^\d+]/g,"");
+  return `<article class="rc${best?" is-best":""}${verified?"":" is-unchecked"}" data-i="${i}">
+    <div class="rc-head"><div class="rc-top">${top}</div><button type="button" class="rc-share" data-act="share" aria-expanded="false">${ico("share")} ${x.share}</button></div>
+    <div class="rc-sheet" hidden>
+      <div class="rc-sheet-k">${x.shareH}</div>
+      <div class="rc-msg">${esc(p.name)}<br><span dir="ltr">${esc(prettyPhone(p.phone))}</span>${p.area?" · "+esc(p.area):""}<br><span class="rc-url">${esc(shareURL())}</span></div>
+      <div class="rc-sheet-actions">
+        <a class="btn ghost" href="https://wa.me/?text=${encodeURIComponent(shareText(p)+"\n"+shareURL())}" target="_blank" rel="noopener">${ico("chat")} ${x.wa}</a>
+        <button type="button" class="btn ghost" data-act="copy">${ico("doc")} ${x.copy}</button>
+        ${navigator.share?`<button type="button" class="btn ghost rc-more" data-act="native" aria-label="${x.more}">${ico("share")}</button>`:""}
+      </div>
+    </div>
+    <h3 class="${best?"rc-name serif":"rc-name"}">${esc(p.name)}</h3>
+    ${meta?`<p class="rc-meta">${meta}</p>`:""}
+    ${chips.length?`<div class="rc-chips">${chips.map(c=>`<span>${c}</span>`).join("")}</div>`:""}
+    <div class="rc-actions">
+      ${tel?`<a class="btn rc-call" href="tel:${esc(tel)}">${ico("phone")} ${x.call}</a>`:""}
+      ${p.wa?`<a class="btn ghost rc-wa" href="https://wa.me/${esc(p.wa)}" target="_blank" rel="noopener">${ico("chat")} ${x.wa}</a>`:""}
+      ${!tel&&p.ll?`<a class="btn rc-call" href="${dirURL(p.ll)}" target="_blank" rel="noopener">${ico("pin")} ${x.directions}</a>`:""}
+    </div>
+    <div class="rc-links">
+      ${p.site?`<a href="${esc(p.site)}" target="_blank" rel="noopener">${ico("globe")} ${x.site}</a>`:""}
+      ${p.ll&&tel?`<a href="${dirURL(p.ll)}" target="_blank" rel="noopener">${ico("pin")} ${x.directions}</a>`:""}
+      <button type="button" class="rc-wrong" data-act="report" aria-expanded="false" aria-label="${x.reportH}">${ico("flag")} ${x.wrong}</button>
+    </div>
+  </article>`;
+}
+function bindCards(box){
+  box.querySelectorAll(".rc").forEach(card=>{
+    const p=RESULTS[+card.dataset.i], x=t();
+    card.addEventListener("click",async ev=>{
+      const b=ev.target.closest("[data-act]"); if(!b) return;
+      const act=b.dataset.act, sheet=card.querySelector(".rc-sheet");
+      if(act==="share"){ const open=sheet.hidden; sheet.hidden=!open; b.setAttribute("aria-expanded",open); }
+      if(act==="copy"){ try{await navigator.clipboard.writeText(shareText(p)+"\n"+shareURL());toast(x.copied);}catch(e){toast(shareURL());} }
+      if(act==="native"){ try{await navigator.share({title:p.name,text:shareText(p),url:shareURL()});}catch(e){} }
+      if(act==="report"){                       /* open a one-tap "what's wrong?" picker */
+        let pnl=card.querySelector(".rc-report");
+        if(pnl){ pnl.remove(); b.setAttribute("aria-expanded","false"); return; }
+        pnl=document.createElement("div"); pnl.className="rc-report";
+        pnl.innerHTML=`<div class="rc-sheet-k">${x.reportH}</div><div class="rc-reasons">${["phone","closed","hours","papers","other"].map(r=>`<button type="button" data-act="reason" data-r="${r}">${x["reason_"+r]}</button>`).join("")}</div>`;
+        card.appendChild(pnl); b.setAttribute("aria-expanded","true");
+      }
+      if(act==="reason"){
+        const city=CITIES[S.city]; 
+        if(CONFIG.LOG_URL){ try{fetch(CONFIG.LOG_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({report:1,name:p.name,reason:b.dataset.r,need:S.need,city:city&&city.dyn?(city.n.en||""):S.city,lang:S.lang})}).catch(()=>{});}catch(e){} }
+        const pnl=card.querySelector(".rc-report"); pnl.innerHTML=`<p class="rc-thanks">${ico("check")} ${x.reportThanks}</p>`;
+        const w=card.querySelector(".rc-wrong"); if(w){ w.disabled=true; w.setAttribute("aria-expanded","false"); }
+      }
+    });
+  });
+}
+async function fillResults(){
+  const box=document.getElementById("resbox"); if(!box)return;
+  const x=t(),c=CITIES[S.city],key=`${S.city}|${S.need}|${S.lang}`; box.dataset.k=key;
+  box.innerHTML=`<p class="muted loading">${x.loading}</p>`;
+  /* Phase 1: your Sheet (fast) shows right away. Phase 2: OpenStreetMap (slow, public servers) is added when it arrives. */
+  const all=await loadVerified();
+  if(box.dataset.k!==key||!document.body.contains(box))return;
+  const ver=all.filter(p=>p.need===S.need&&(p.city===S.city||(p.ll&&c.ll&&km(p.ll,c.ll)<CONFIG.VERIFIED_RADIUS_KM)))
+    .sort((a,b)=>((b.langs||[]).includes(S.lang)-(a.langs||[]).includes(S.lang))||String(b.checked).localeCompare(String(a.checked)));
+  const fromSheet=SHEET_UNCHECKED.filter(p=>p.need===S.need&&c.ll&&km(p.ll,c.ll)<CONFIG.VERIFIED_RADIUS_KM).map(p=>({...p,d:km(c.ll,p.ll)}));
+  const draw=(osm,state)=>{
+    const vnames=new Set(ver.map(p=>p.name.toLowerCase())),seenN=new Set();
+    const near=[...fromSheet,...osm].filter(p=>{const k=p.name.toLowerCase();if(vnames.has(k)||seenN.has(k))return false;seenN.add(k);return true;})
+      .sort((a,b)=>a.d-b.d).slice(0,CONFIG.MAX_NEARBY+fromSheet.length);
+    const head=`<div class="reshead"><b>${ver.length?x.count(ver.length):esc(c.n[S.lang])}</b></div>`;
+    const verD=ver.map(p=>({...p,d:p.ll&&c.ll?km(c.ll,p.ll):null}));
+    RESULTS=[...verD,...near];
+    const verH=verD.length?`<div class="rc-list">${verD.map((p,i)=>resultCard(p,x,i,i===0)).join("")}</div>`:"";
+    const nearH=near.length?`<h4 class="nearH">${x.nearbyH}</h4><p class="nearNote">${x.nearbyNote}</p><div class="rc-list">${near.map((p,i)=>resultCard(p,x,verD.length+i,false)).join("")}</div>`:"";
+    const more=state==="loading"?`<p class="more-loading"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>${x.moreLoading}</p>`:"";
+    const empty=(state!=="loading"&&!ver.length&&!near.length)?`<div class="empty"><p>${state==="failed"?x.soon(esc(c.n[S.lang])):x.nothingNear}</p><a href="https://help.unhcr.org/" target="_blank" rel="noopener">${x.unhcr}</a></div>`:"";
+    const sos=c.sos?`<div class="sos"><span>${x.sos(c.sos)}</span><a href="tel:${c.sos}">${ico("phone")} ${c.sos}</a></div>`:`<div class="sos"><span>${x.sosGeneric}</span></div>`;
+    const sample=!FROM_SHEET&&ver.length>0;
+    const notes=[sample?x.demo:"",state==="failed"&&LIVE===false?x.liveOff:""].filter(Boolean).map(n=>`<p class="demo">${n}</p>`).join("");
+    box.innerHTML=head+verH+nearH+more+empty+sos+notes;
+    
+    bindCards(box);
+    requestAnimationFrame(()=>focusCard(true));
+  };
+  const cached=nearbyCache[`${c.ll}|${S.need}`];
+  if(cached){ draw(cached,"done"); logSearch(); return; }
+  draw([],"loading"); logSearch();
+  try{ const osm=await nearbyOSM(c,S.need); if(box.dataset.k===key&&document.body.contains(box)) draw(osm,"done"); }
+  catch(e){ if(box.dataset.k===key&&document.body.contains(box)) draw([],"failed"); }
+}
+
+async function share(){
+  const url=location.href;
+  try{if(navigator.share){await navigator.share({title:"AidOasis",url});return;}}catch(e){return;}
+  try{await navigator.clipboard.writeText(url);toast(t().copied);}catch(e){toast(url);}
+}
+function toast(m){const el=document.getElementById("toast");el.textContent=m;el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800);}
+
+/* ABOUT */
+function vAbout(){
+  const x=t();
+  const top=x.needsDiag.map((l,i)=>`<div class="eco-item">${tileIcon(DIAG_ICONS[i],i)}${l}</div>`).join("");
+  const bottom=x.groups.map(g=>`<div class="eco-item"><span class="eco-tag">${g}</span></div>`).join("");
+  const conv=[0,1,2,3,4,5,6].map(i=>{const px=50+i*100;return `<path d="M${px} 0 C${px} 45 350 30 350 72"/>`;}).join("");
+  const fan=[0,1,2,3,4].map(i=>{const px=70+i*140;return `<path d="M350 0 C350 42 ${px} 28 ${px} 72"/>`;}).join("");
+  app.innerHTML=aboutStory(x)+`<div class="after-story" id="afterStory">
+    
+    ${sec(x.ecoH,1,`
+      <div class="eco" role="img" aria-label="${x.ecoH}: ${x.needsDiag.join(", ")} → AidOasis → ${x.groups.join(", ")}">
+        <p class="eco-lab">${x.services}</p>
+        <div class="eco-row top">${top}</div>
+        <svg class="fan" viewBox="0 0 700 72" preserveAspectRatio="none" aria-hidden="true">${conv}</svg>
+        <div class="eco-mid"><hr><b><i class="mk" aria-hidden="true"></i>AidOasis</b><hr></div>
+        <svg class="fan" viewBox="0 0 700 72" preserveAspectRatio="none" aria-hidden="true">${fan}</svg>
+        <div class="eco-row bottom">${bottom}</div>
+        <p class="eco-lab">${x.seekers}</p>
+      </div>`)}
+    ${sec(x.verifyH,2,`
+      <div class="split">
+        <div>
+          <div class="block">${rows(x.verify)}</div>
+          <div class="block"><h2 class="small">${x.privH}</h2>${rows(x.priv)}</div>
+        </div>
+        <div class="door lime"><div><h3>${x.orgH}</h3><p>${x.orgP}</p></div><a class="btn" href="#organizations">${x.orgCta}${arr}</a></div>
+      </div>`)}</div>`;
+  bindAboutStory();
+}
+
+/* ABOUT · scroll story */
+const reduceMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+function aboutStory(x){
+  const n=x.abStory.length;
+  const end=cls=>`<div class="ab-end" id="abEnd"><a class="btn ${cls[0]}" href="#find">${x.findCta}${arr}</a><a class="btn ${cls[1]}" href="#organizations">${x.orgCta}${arr}</a></div>`;
+  const photo=`<div class="ab-photo" role="img" aria-label="Two children outside tents in a displacement camp"></div><div class="ab-shade"></div><span class="ab-credit">Photo: Ahmed Akacha / Pexels</span>`;
+  if(reduceMotion()){
+    return `<section class="ab-static" aria-label="${x.storyLabel}"><div class="ab-frame">${photo}</div>
+      <ol>${x.abStory.map((l,i)=>`<li><span>${pad(i+1)}</span>${l}</li>`).join("")}</ol>${end(["",'ghost'])}</section>`;
+  }
+  return `<section class="ab-story" id="abStory" style="--beats:${n}" aria-label="${x.storyLabel}">
+    ${x.abStory.map((_,i)=>`<div class="ab-snap" style="top:calc(${i} * 100svh)"></div>`).join("")}
+    <div class="ab-pin"><div class="ab-frame">${photo}
+      <div class="ab-foot">
+        <div class="ab-lines" aria-live="polite">${x.abStory.map((l,i)=>`<p data-i="${i}">${l}</p>`).join("")}</div>
+        ${end(["light","ghost"])}
+        <div class="ab-meta"><button class="ab-skip" type="button" id="abSkip">${x.skipStory}</button><div class="ab-bar"><i id="abBar"></i></div><span class="ab-num"><b id="abNo">01</b> / ${pad(n)}</span></div>
+      </div>
+    </div></div>
+  </section>`;
+}
+let abBound=false;
+function bindAboutStory(){
+  const skip=document.getElementById("abSkip");
+  if(skip) skip.onclick=()=>{document.documentElement.classList.remove("ab-snapping");document.getElementById("afterStory").scrollIntoView({behavior:"smooth"});};
+  if(!document.getElementById("abStory")) return;
+  if(!abBound){abBound=true;let tk=false;
+    addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;aboutFrame();});}},{passive:true});
+    addEventListener("resize",aboutFrame);}
+  aboutFrame();
+}
+function aboutFrame(){
+  const st=document.getElementById("abStory"),root=document.documentElement;
+  if(!st){root.classList.remove("ab-snapping");return;}
+  const hh=document.querySelector("header").offsetHeight,r=st.getBoundingClientRect();
+  const span=Math.max(1,r.height-innerHeight),p=Math.min(1,Math.max(0,(hh-r.top)/span));
+  /* snap only while the story fills the screen; normal scrolling elsewhere */
+  root.classList.toggle("ab-snapping",r.top<=hh+24&&r.bottom>=innerHeight-24);
+  const lines=[...st.querySelectorAll(".ab-lines p")],n=lines.length,pos=p*(n-1),cur=Math.min(n-1,Math.round(pos));
+  lines.forEach((el,i)=>{const d=pos-i,o=Math.max(0,1-Math.abs(d)*1.8);
+    el.style.opacity=o.toFixed(3);el.style.transform=`translateY(${(-d*18).toFixed(1)}px)`;});
+  const ph=st.querySelector(".ab-photo"); if(ph) ph.style.transform=`translateY(${(-p*5).toFixed(2)}%) scale(${(1.1-p*.06).toFixed(3)})`;
+  document.getElementById("abNo").textContent=pad(cur+1);
+  document.getElementById("abBar").style.transform=`scaleX(${(p).toFixed(3)})`;
+  const last=cur===n-1&&p>.97;
+  document.getElementById("abEnd").classList.toggle("on",last);
+  document.getElementById("abSkip").style.visibility=last?"hidden":"visible";
+}
+
+/* ORGANIZATIONS */
+function vOrgs(){
+  const x=t(),f=x.f;
+  const radios=(name,opts)=>`<div class="opts">${opts.map(([v,l])=>`<label><input type="radio" name="${name}" value="${v}" required>${l}</label>`).join("")}</div>`;
+  const form=S.sent?`<div class="done"><h3>${x.doneH}</h3><p>${x.doneP}</p></div>`:`
+    <form id="orgForm">
+      <div class="field"><label class="label" for="o1">${f.org}</label><input id="o1" name="org" type="text" required autocomplete="organization"></div>
+      <div class="field"><label class="label" for="o2">${f.name}</label><input id="o2" name="name" type="text" required autocomplete="name"></div>
+      <div class="field"><label class="label" for="o3">${f.reach}</label><input id="o3" name="reach" type="text" required></div>
+      <div class="field"><label class="label" for="o4">${f.city}</label><input id="o4" name="city" type="text" required></div>
+      <fieldset class="field"><legend class="label">${f.offer}</legend>
+        <div class="opts">${NEEDS.map(([k,i,l])=>`<label><input type="checkbox" name="offer" value="${k}">${l[S.lang]}</label>`).join("")}</div></fieldset>
+      <div class="field"><label class="label" for="o5">${f.langs}</label><input id="o5" name="langs" type="text"></div>
+      <fieldset class="field"><legend class="label">${f.cost}</legend>${radios("cost",[["yes",x.yes],["some",x.some],["no",x.no]])}</fieldset>
+      <fieldset class="field"><legend class="label">${f.papers}</legend>${radios("papers",[["no",x.no],["some",x.some],["yes",x.yes]])}</fieldset>
+      <div class="field"><label class="label" for="o6">${f.site}</label><input id="o6" name="site" type="text" inputmode="url"></div>
+      <button class="btn full" type="submit">${f.submit}${arr}</button>
+    </form>`;
+  app.innerHTML=hero(x.orgsH,x.orgsP,`<button class="btn light" type="button" id="toForm">${x.formH}${arr}</button>`)
+    +sec(x.benefitsH,1,rows(x.benefits))
+    +sec(x.stepsH,2,rows(x.steps))
+    +sec(x.formH,3,`<div class="formwrap">${form}</div>`,"formSec");
+  document.getElementById("toForm").onclick=()=>document.getElementById("formSec").scrollIntoView({behavior:"smooth"});
+  const el=document.getElementById("orgForm");
+  if(el) el.onsubmit=e=>{
+    e.preventDefault();
+    const fd=new FormData(el);
+    submitOrg(Object.fromEntries([...new Set(fd.keys())].map(k=>[k,fd.getAll(k).join("|")])));
+  };
+}
+function submitOrg(data){
+  if(CONFIG.ORG_URL){try{fetch(CONFIG.ORG_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({...data,lang:S.lang,submitted:new Date().toISOString()})}).catch(()=>{});}catch(e){}}
+  S.sent=true;vOrgs();document.getElementById("formSec").scrollIntoView();
+}
+
+/* SYSTEM CHECK: open yoursite/#status */
+async function vStatus(){
+  app.innerHTML=`<section><h1>System check</h1><p class="lede">Tests each live connection from this browser. Share a screenshot if something is red.</p><ol class="rows" id="chk"></ol></section>`;
+  const list=document.getElementById("chk");
+  const add=(name,ok,detail)=>{const li=document.createElement("li");li.innerHTML=`<span class="n" style="background:${ok?"var(--sky)":"var(--orange)"};color:#fff;border:0">${ok?"✓":"!"}</span><div><b>${esc(name)}</b><span class="d">${esc(detail)}</span></div>`;list.appendChild(li);};
+  add("Website version",true,"2026-11-04 · review workflow · if you don’t see this line, the old file is still live");
+  add("Page host",location.protocol.startsWith("http"),location.protocol.startsWith("http")?location.origin:"Opened as a local file. Live features need the site to be hosted (e.g. Netlify).");
+  if(!CONFIG.SHEET_CSV_URL) add("Google Sheet",false,"CONFIG.SHEET_CSV_URL is empty.");
+  else try{
+    const txt=await sheetText();
+    const rows=parseCSV(txt),h=(rows.shift()||[]).map(x=>x.replace(/^\ufeff/,"").trim().toLowerCase());
+    const need=["status","name","need","lat","lon"].filter(c=>!h.includes(c));
+    const si=h.indexOf("status"),ver=rows.filter(r=>(r[si]||"").trim().toLowerCase()==="verified").length,st=k=>rows.filter(r=>(r[si]||"").trim().toLowerCase()===k).length,tv=st("approved"),rv=st("review");
+    add("Google Sheet",!need.length,`Source: ${SHEET_SOURCE}. ${rows.filter(r=>r.join("").trim()).length} rows: ${ver} verified (shown as Checked), ${tv} approved (shown as Not yet checked), ${rv} waiting in review (hidden).${need.length?" Missing columns: "+need.join(", "):""}`);
+  }catch(e){add("Google Sheet",false,"Could not load the published CSV: "+(e.message||e)+". Check File › Share › Publish to web is on for LISTINGS.");}
+  try{const r=await geocode("Seal Beach");add("City search",r.length>0,`${GEO_SOURCE}: ${r.slice(0,3).map(x=>[x.name,x.state,x.country].filter(Boolean).join(", ")).join(" · ")||"no results"}`);}
+  catch(e){add("City search",false,"Both geocoders failed: "+(e.message||e));}
+  try{const r=await nearbyOSM({ll:[33.7414,-118.1048]},"food");add("Nearby places (OpenStreetMap)",true,`${r.length} food places within ${CONFIG.RADIUS_KM} km of Seal Beach${r[0]?": "+r.slice(0,3).map(x=>x.name).join(", "):""}`);}
+  catch(e){add("Nearby places (OpenStreetMap)",false,"Overpass servers did not answer: "+(e.message||e));}
+  add("Search log + organization form",!!CONFIG.LOG_URL,CONFIG.LOG_URL?"Apps Script URL set.":"Not connected yet (CONFIG.LOG_URL empty). Optional.");
+}
+
+document.getElementById("mark").onclick=e=>{e.preventDefault();mounted=null;go(S.lang||"");};
+cachedText();
+readHash();render();
+loadVerified().catch(()=>{});
+refreshText();
+</script>
+</body>
+</html>
